@@ -2,5 +2,9 @@
     "godotTools.editorPath.godot4": "r:\\Games Engines\\GoDOT\\Godot_v4.5-dev5_win64.exe",
     "files.exclude": {
         "**/*.gd.uid": true
-    }
+    },
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
 }

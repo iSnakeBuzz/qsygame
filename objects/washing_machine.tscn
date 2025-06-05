@@ -1,40 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://blj4vtvx2im5b"]
+[gd_scene load_steps=6 format=3 uid="uid://blj4vtvx2im5b"]
+
+[ext_resource type="Script" uid="uid://cjjmxe2earg8n" path="res://scripts/washing_machine.gd" id="1_kjuok"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kjuok"]
+size = Vector3(1.2, 1.8812695, 1.4047523)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3yc0x"]
 size = Vector3(1.2, 1.91, 1.33)
 
-[node name="WashingMachine" type="Node3D"]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91, 0)
+[sub_resource type="BoxMesh" id="BoxMesh_7jpbw"]
 size = Vector3(1.2, 1.91, 1.33)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91, -0.5)
-size = Vector3(0.42285156, 0.63964844, 0.4892578)
+[sub_resource type="BoxMesh" id="BoxMesh_k44nr"]
+size = Vector3(0.35, 0.71, 0.14)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="WashingMachine" type="Node3D" node_paths=PackedStringArray("meshes")]
+script = ExtResource("1_kjuok")
+meshes = [NodePath("Area/MeshInstance3D"), NodePath("Area/MeshInstance3D/MeshInstance3D2")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91, 0)
+[node name="Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
+
+[node name="AreaCollision" type="CollisionShape3D" parent="Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.014365256, -0.037670255)
+shape = SubResource("BoxShape3D_kjuok")
+
+[node name="StaticBody" type="StaticBody3D" parent="Area"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area/StaticBody"]
 shape = SubResource("BoxShape3D_3yc0x")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area"]
+mesh = SubResource("BoxMesh_7jpbw")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Area/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.67)
+mesh = SubResource("BoxMesh_k44nr")
+skeleton = NodePath("../../..")
+
 [node name="Ray1" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58596313, -0.02, -0.65093845)
-target_position = Vector3(0, -0.03, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58596313, 0.055, -0.65093845)
+target_position = Vector3(0, -0.09, 0)
 collision_mask = 2
 
 [node name="Ray2" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, -0.02, -0.651)
-target_position = Vector3(0, -0.03, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, 0.055, -0.651)
+target_position = Vector3(0, -0.09, 0)
 collision_mask = 2
 
 [node name="Ray3" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, -0.02, 0.651)
-target_position = Vector3(0, -0.03, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, 0.055, 0.651)
+target_position = Vector3(0, -0.09, 0)
 collision_mask = 2
 
 [node name="Ray4" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.586, -0.02, 0.651)
-target_position = Vector3(0, -0.03, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.586, 0.055, 0.651)
+target_position = Vector3(0, -0.09, 0)
 collision_mask = 2

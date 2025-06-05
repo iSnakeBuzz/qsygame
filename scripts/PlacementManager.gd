@@ -1,10 +1,13 @@
 extends Node
 
-@onready var WashingMachine = preload("res://objects/washing_machine.tscn")
+@onready var WashingMachineObject = preload("res://objects/washing_machine.tscn")
 
 var instance: Node3D
 var target_rotation_y := 0.0
 var rotation_speed := 25.0
+
+var placing: bool = false
+var can_place: bool = false
 
 func _process(_delta: float) -> void:
 	if not Game.Player or not Game.Player.getCollisionWith():
@@ -17,6 +20,8 @@ func _process(_delta: float) -> void:
 
 	print("Instance position: " + str(instance.transform.origin) + " Collision position: " + str(collision))
 	instance.transform.origin = collision
+
+	can_place = instance.check_placement()
 
 	var current_y = instance.rotation.y
 	var new_y = lerp_angle(current_y, target_rotation_y, _delta * rotation_speed)
@@ -42,11 +47,17 @@ func _handle_keys(event: InputEventKey) -> void:
 	if not event.pressed:
 		return
 
-	if event.is_action_pressed("key_1"):
-		instance = WashingMachine.instantiate()
+	if event.is_action_pressed("key_1") and not placing:
+		instance = WashingMachineObject.instantiate()
 		add_child(instance)
+		placing = true
 		print("Instance created")
-	elif event.is_action_pressed("key_0"):
+	elif event.is_action_pressed("key_0") and instance:
 		instance.queue_free()
 		instance = null
+		placing = false
+		target_rotation_y = 0.0
 		print("Instance destroyed")
+	elif event.is_action_pressed("action"):
+		if can_place:
+			pass
