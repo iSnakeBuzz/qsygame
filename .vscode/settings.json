@@ -3,8 +3,8 @@
     "files.exclude": {
         "**/*.gd.uid": true
     },
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": true,
     "editor.tabSize": 4,
     "editor.formatOnSave": true,
 }

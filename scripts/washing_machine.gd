@@ -19,6 +19,10 @@ func _allowed_placement() -> void:
 	for mesh in meshes:
 		mesh.material_override = allowed_placement
 
+func _clean_placement() -> void:
+	for mesh in meshes:
+		mesh.material_override = null
+
 func check_placement() -> bool:
 	for ray in raycasts:
 		if not ray.is_colliding():
@@ -31,3 +35,6 @@ func check_placement() -> bool:
 
 	_allowed_placement()
 	return true
+
+func place() -> void:
+	_clean_placement()

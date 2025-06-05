@@ -6,15 +6,16 @@ var _PRICES: Dictionary = {
 var _machines: Array[WashingMachine]
 
 var Player: PlayerController
-var Money: int = 999
+var Money: int = 2500
 
-func purchaseWashingMachine(machine: WashingMachine) -> void:
+func purchaseWashingMachine(machine: WashingMachine) -> bool:
 	var price = _PRICES["washing_machine"]
 
 	if Money < price:
 		print("You do not have enough money to buy this machine")
-		return
+		return false
 
 	Money -= price
 	_machines.append(machine)
 	print("Dinerito updated and machine placed.")
+	return true

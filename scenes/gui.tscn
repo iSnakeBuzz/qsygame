@@ -5,11 +5,8 @@ script/source = "extends Label
 
 var cachedText: String
 
-# To prevent parsing strings in every frame, I just cache this to prevent cpu leaks. :)
 func _process(_delta: float) -> void:
-	if self.text == cachedText: return
-	cachedText = \"CASH: %s\" % [Game.Money];
-	self.text = cachedText
+	self.text = \"CASH: %s\" % [Game.Money]
 "
 
 [node name="GUI" type="CanvasLayer"]
