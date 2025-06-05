@@ -10,24 +10,24 @@ extends CharacterBody3D
 ## The settings for the character's movement and feel.
 @export_category("Character")
 ## The speed that the character moves at without crouching or sprinting.
-@export var base_speed : float = 3.0
+@export var base_speed: float = 3.0
 ## The speed that the character moves at when sprinting.
-@export var sprint_speed : float = 6.0
+@export var sprint_speed: float = 6.0
 ## The speed that the character moves at when crouching.
-@export var crouch_speed : float = 1.0
+@export var crouch_speed: float = 1.0
 
 ## How fast the character speeds up and slows down when Motion Smoothing is on.
-@export var acceleration : float = 10.0
+@export var acceleration: float = 10.0
 ## How high the player jumps.
-@export var jump_velocity : float = 4.5
+@export var jump_velocity: float = 4.5
 ## How far the player turns when the mouse is moved.
-@export var mouse_sensitivity : float = 0.1
+@export var mouse_sensitivity: float = 0.1
 ## Invert the X axis input for the camera.
-@export var invert_camera_x_axis : bool = false
+@export var invert_camera_x_axis: bool = false
 ## Invert the Y axis input for the camera.
-@export var invert_camera_y_axis : bool = false
+@export var invert_camera_y_axis: bool = false
 ## Whether the player can use movement inputs. Does not stop outside forces or jumping. See Jumping Enabled.
-@export var immobile : bool = false
+@export var immobile: bool = false
 ## The reticle file to import at runtime. By default are in res://addons/fpc/reticles/. Set to an empty string to remove.
 @export_file var default_reticle
 
@@ -37,17 +37,17 @@ extends CharacterBody3D
 
 @export_group("Nodes")
 ## A reference to the camera for use in the character script. This is the parent node to the camera and is rotated instead of the camera for mouse input.
-@export var HEAD : Node3D
+@export var HEAD: Node3D
 ## A reference to the camera for use in the character script.
-@export var CAMERA : Camera3D
+@export var CAMERA: Camera3D
 ## A reference to the headbob animation for use in the character script.
-@export var HEADBOB_ANIMATION : AnimationPlayer
+@export var HEADBOB_ANIMATION: AnimationPlayer
 ## A reference to the jump animation for use in the character script.
-@export var JUMP_ANIMATION : AnimationPlayer
+@export var JUMP_ANIMATION: AnimationPlayer
 ## A reference to the crouch animation for use in the character script.
-@export var CROUCH_ANIMATION : AnimationPlayer
+@export var CROUCH_ANIMATION: AnimationPlayer
 ## A reference to the the player's collision shape for use in the character script.
-@export var COLLISION_MESH : CollisionShape3D
+@export var COLLISION_MESH: CollisionShape3D
 
 #endregion
 
@@ -56,7 +56,7 @@ extends CharacterBody3D
 # We are using UI controls because they are built into Godot Engine so they can be used right away
 @export_group("Controls")
 ## Use the Input Map to map a mouse/keyboard input to an action and add a reference to it to this dictionary to be used in the script.
-@export var controls : Dictionary = {
+@export var controls: Dictionary = {
 	LEFT = "ui_left",
 	RIGHT = "ui_right",
 	FORWARD = "ui_up",
@@ -68,16 +68,16 @@ extends CharacterBody3D
 	}
 @export_subgroup("Controller Specific")
 ## This only affects how the camera is handled, the rest should be covered by adding controller inputs to the existing actions in the Input Map.
-@export var controller_support : bool = false
+@export var controller_support: bool = false
 ## Use the Input Map to map a controller input to an action and add a reference to it to this dictionary to be used in the script.
-@export var controller_controls : Dictionary = {
+@export var controller_controls: Dictionary = {
 	LOOK_LEFT = "look_left",
 	LOOK_RIGHT = "look_right",
 	LOOK_UP = "look_up",
 	LOOK_DOWN = "look_down"
 	}
 ## The sensitivity of the analog stick that controls camera rotation. Lower is less sensitive and higher is more sensitive.
-@export_range(0.001, 1, 0.001) var look_sensitivity : float = 0.035
+@export_range(0.001, 1, 0.001) var look_sensitivity: float = 0.035
 
 #endregion
 
@@ -85,61 +85,61 @@ extends CharacterBody3D
 
 @export_group("Feature Settings")
 ## Enable or disable jumping. Useful for restrictive storytelling environments.
-@export var jumping_enabled : bool = true
+@export var jumping_enabled: bool = true
 ## Whether the player can move in the air or not.
-@export var in_air_momentum : bool = true
+@export var in_air_momentum: bool = true
 ## Smooths the feel of walking.
-@export var motion_smoothing : bool = true
+@export var motion_smoothing: bool = true
 ## Enables or disables sprinting.
-@export var sprint_enabled : bool = true
+@export var sprint_enabled: bool = true
 ## Toggles the sprinting state when button is pressed or requires the player to hold the button down to remain sprinting.
-@export_enum("Hold to Sprint", "Toggle Sprint") var sprint_mode : int = 0
+@export_enum("Hold to Sprint", "Toggle Sprint") var sprint_mode: int = 0
 ## Enables or disables crouching.
-@export var crouch_enabled : bool = true
+@export var crouch_enabled: bool = true
 ## Toggles the crouch state when button is pressed or requires the player to hold the button down to remain crouched.
-@export_enum("Hold to Crouch", "Toggle Crouch") var crouch_mode : int = 0
+@export_enum("Hold to Crouch", "Toggle Crouch") var crouch_mode: int = 0
 ## Wether sprinting should effect FOV.
-@export var dynamic_fov : bool = true
+@export var dynamic_fov: bool = true
 ## If the player holds down the jump button, should the player keep hopping.
-@export var continuous_jumping : bool = true
+@export var continuous_jumping: bool = true
 ## Enables the view bobbing animation.
-@export var view_bobbing : bool = true
+@export var view_bobbing: bool = true
 ## Enables an immersive animation when the player jumps and hits the ground.
-@export var jump_animation : bool = true
+@export var jump_animation: bool = true
 ## This determines wether the player can use the pause button, not wether the game will actually pause.
-@export var pausing_enabled : bool = true
+@export var pausing_enabled: bool = true
 ## Use with caution.
-@export var gravity_enabled : bool = true
+@export var gravity_enabled: bool = true
 ## If your game changes the gravity value during gameplay, check this property to allow the player to experience the change in gravity.
-@export var dynamic_gravity : bool = false
+@export var dynamic_gravity: bool = false
 
 #endregion
 
 #region Member Variable Initialization
 
 # These are variables used in this script that don't need to be exposed in the editor.
-var speed : float = base_speed
-var current_speed : float = 0.0
+var speed: float = base_speed
+var current_speed: float = 0.0
 # States: normal, crouching, sprinting
-var state : String = "normal"
-var low_ceiling : bool = false # This is for when the ceiling is too low and the player needs to crouch.
-var was_on_floor : bool = true # Was the player on the floor last frame (for landing animation)
+var state: String = "normal"
+var low_ceiling: bool = false # This is for when the ceiling is too low and the player needs to crouch.
+var was_on_floor: bool = true # Was the player on the floor last frame (for landing animation)
 
 # The reticle should always have a Control node as the root
-var RETICLE : Control
+var RETICLE: Control
 
 # Get the gravity from the project settings to be synced with RigidBody nodes
-var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity") # Don't set this as a const, see the gravity section in _physics_process
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity") # Don't set this as a const, see the gravity section in _physics_process
 
 # Stores mouse input for rotating the camera in the physics process
-var mouseInput : Vector2 = Vector2(0,0)
+var mouseInput: Vector2 = Vector2(0, 0)
 
 #endregion
 
 #region Raycast Setup
 @onready var ray_cast: RayCast3D = $Head/RayCast
 
-func getCollisionWith() -> Vector3: 
+func getCollisionWith() -> Vector3:
 	if ray_cast.is_colliding():
 		return ray_cast.get_collision_point()
 	else:
@@ -163,7 +163,8 @@ func _ready():
 	check_controls()
 	enter_normal_state()
 
-	Game.setPlayer(self)
+	# Set player globally.
+	Game.Player = self
 
 
 func _process(_delta):
@@ -270,7 +271,7 @@ func handle_head_rotation():
 		else:
 			HEAD.rotation.y += controller_view_rotation.y
 
-	mouseInput = Vector2(0,0)
+	mouseInput = Vector2(0, 0)
 	HEAD.rotation.x = clamp(HEAD.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
@@ -384,14 +385,14 @@ func initialize_animations():
 
 func play_headbob_animation(moving):
 	if moving and is_on_floor():
-		var use_headbob_animation : String
+		var use_headbob_animation: String
 		match state:
-			"normal","crouching":
+			"normal", "crouching":
 				use_headbob_animation = "walk"
 			"sprinting":
 				use_headbob_animation = "sprint"
 
-		var was_playing : bool = false
+		var was_playing: bool = false
 		if HEADBOB_ANIMATION.current_animation == use_headbob_animation:
 			was_playing = true
 
@@ -411,12 +412,12 @@ func play_headbob_animation(moving):
 
 func play_jump_animation():
 	if !was_on_floor and is_on_floor(): # The player just landed
-		var facing_direction : Vector3 = CAMERA.get_global_transform().basis.x
-		var facing_direction_2D : Vector2 = Vector2(facing_direction.x, facing_direction.z).normalized()
-		var velocity_2D : Vector2 = Vector2(velocity.x, velocity.z).normalized()
+		var facing_direction: Vector3 = CAMERA.get_global_transform().basis.x
+		var facing_direction_2D: Vector2 = Vector2(facing_direction.x, facing_direction.z).normalized()
+		var velocity_2D: Vector2 = Vector2(velocity.x, velocity.z).normalized()
 
 		# Compares velocity direction against the camera direction (via dot product) to determine which landing animation to play.
-		var side_landed : int = round(velocity_2D.dot(facing_direction_2D))
+		var side_landed: int = round(velocity_2D.dot(facing_direction_2D))
 
 		if side_landed > 0:
 			JUMP_ANIMATION.play("land_right", 0.25)
@@ -431,7 +432,7 @@ func play_jump_animation():
 
 func update_debug_menu_per_frame():
 	$UserInterface/DebugPanel.add_property("FPS", Performance.get_monitor(Performance.TIME_FPS), 0)
-	var status : String = state
+	var status: String = state
 	if !is_on_floor():
 		status += " in the air"
 	$UserInterface/DebugPanel.add_property("State", status, 4)
@@ -442,17 +443,17 @@ func update_debug_menu_per_tick():
 	current_speed = Vector3.ZERO.distance_to(get_real_velocity())
 	$UserInterface/DebugPanel.add_property("Speed", snappedf(current_speed, 0.001), 1)
 	$UserInterface/DebugPanel.add_property("Target speed", speed, 2)
-	var cv : Vector3 = get_real_velocity()
-	var vd : Array[float] = [
+	var cv: Vector3 = get_real_velocity()
+	var vd: Array[float] = [
 		snappedf(cv.x, 0.001),
 		snappedf(cv.y, 0.001),
 		snappedf(cv.z, 0.001)
 	]
-	var readable_velocity : String = "X: " + str(vd[0]) + " Y: " + str(vd[1]) + " Z: " + str(vd[2])
+	var readable_velocity: String = "X: " + str(vd[0]) + " Y: " + str(vd[1]) + " Z: " + str(vd[2])
 	$UserInterface/DebugPanel.add_property("Velocity", readable_velocity, 3)
 
 
-func _unhandled_input(event : InputEvent):
+func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mouseInput.x += event.relative.x
 		mouseInput.y += event.relative.y

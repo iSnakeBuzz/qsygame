@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://mc6b56wptbjv"]
+[gd_scene load_steps=9 format=3 uid="uid://mc6b56wptbjv"]
 
+[ext_resource type="PackedScene" uid="uid://ba7lvfvtn5ypc" path="res://scenes/gui.tscn" id="1_74lek"]
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_errlg"]
 [ext_resource type="Texture2D" uid="uid://cxjxvqmf4boxq" path="res://textures/green.png" id="2_bl13t"]
 [ext_resource type="PackedScene" uid="uid://blj4vtvx2im5b" path="res://objects/washing_machine.tscn" id="3_iyx0m"]
@@ -20,6 +21,8 @@ ssao_enabled = true
 albedo_texture = ExtResource("2_bl13t")
 
 [node name="test" type="Node3D"]
+
+[node name="GUI" parent="." instance=ExtResource("1_74lek")]
 
 [node name="Player" parent="." instance=ExtResource("1_errlg")]
 transform = Transform3D(-1, 0, -8.940697e-08, 0, 1, 0, 8.940697e-08, 0, -1, 12, 0.2, 2)

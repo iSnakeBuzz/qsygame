@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba7lvfvtn5ypc"]
+
+[sub_resource type="GDScript" id="GDScript_66xuh"]
+script/source = "extends Label
+
+var cachedText: String
+
+# To prevent parsing strings in every frame, I just cache this to prevent cpu leaks. :)
+func _process(_delta: float) -> void:
+	if self.text == cachedText: return
+	cachedText = \"CASH: %s\" % [Game.Money];
+	self.text = cachedText
+"
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="MainContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="TOP" type="HBoxContainer" parent="MainContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="MainContainer/VBoxContainer/TOP"]
+layout_mode = 2
+text = "Money CASH"
+script = SubResource("GDScript_66xuh")
