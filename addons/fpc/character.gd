@@ -2,9 +2,8 @@
 # MIT license
 # Quality Godot First Person Controller v2
 
-
+class_name PlayerController
 extends CharacterBody3D
-
 
 #region Character Export Group
 
@@ -137,7 +136,15 @@ var mouseInput : Vector2 = Vector2(0,0)
 
 #endregion
 
+#region Raycast Setup
+@onready var ray_cast: RayCast3D = $Head/RayCast
 
+func getCollisionWith() -> Vector3: 
+	if ray_cast.is_colliding():
+		return ray_cast.get_collision_point()
+	else:
+		return ray_cast.to_global(ray_cast.target_position)
+#endregion
 
 #region Main Control Flow
 
@@ -156,12 +163,13 @@ func _ready():
 	check_controls()
 	enter_normal_state()
 
+	Game.setPlayer(self)
+
 
 func _process(_delta):
 	if pausing_enabled:
 		handle_pausing()
 
-	handle_head_rotation()
 	update_debug_menu_per_frame()
 
 
@@ -181,6 +189,7 @@ func _physics_process(delta): # Most things happen here.
 
 	handle_movement(delta, input_dir)
 
+	handle_head_rotation()
 
 	# The player is not able to stand up if the ceiling is too low
 	low_ceiling = $CrouchCeilingDetection.is_colliding()
@@ -198,7 +207,6 @@ func _physics_process(delta): # Most things happen here.
 	update_debug_menu_per_tick()
 
 	was_on_floor = is_on_floor() # This must always be at the end of physics_process
-
 #endregion
 
 #region Input Handling
