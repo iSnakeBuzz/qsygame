@@ -1,5 +1,13 @@
 class_name WashingMachine extends Node3D
 
+enum WashingStatus {
+	Setup,
+	Free,
+	Waiting,
+	Washing,
+	Finished
+}
+
 @onready var allowed_placement: Material = preload("res://materials/allowed_placement.tres")
 @onready var unallowed_placement: Material = preload("res://materials/unallowed_placement.tres")
 
@@ -7,9 +15,7 @@ class_name WashingMachine extends Node3D
 @onready var raycasts: Array[RayCast3D] = [$Ray1, $Ray2, $Ray3, $Ray4]
 
 @export var meshes: Array[MeshInstance3D]
-
-func _ready() -> void:
-	pass
+@export var status: WashingStatus = WashingStatus.Free
 
 func _unallowed_placement() -> void:
 	for mesh in meshes:

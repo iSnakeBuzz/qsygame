@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6im8rh8uv41k"]
+
+[ext_resource type="Script" uid="uid://bp8nmoslub0mk" path="res://scripts/entities/customer.gd" id="1_fu7rw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_puyae"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fu7rw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_puyae"]
+size = Vector3(0.5, 0.15, 0.1)
+
+[node name="Customer" type="CharacterBody3D" node_paths=PackedStringArray("meshes")]
+script = ExtResource("1_fu7rw")
+speed = 300.0
+meshes = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D/MeshInstance3D")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
+shape = SubResource("CapsuleShape3D_puyae")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
+mesh = SubResource("CapsuleMesh_fu7rw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40000004, -0.5)
+mesh = SubResource("BoxMesh_puyae")

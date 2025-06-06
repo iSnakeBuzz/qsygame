@@ -18,9 +18,7 @@ func _process(_delta: float) -> void:
 	if not instance:
 		return
 
-	# print("Instance position: " + str(instance.transform.origin) + " Collision position: " + str(collision))
-	instance.transform.origin = collision
-
+	instance.transform.origin = _snap_to_grid(collision)
 	can_place = instance.check_placement()
 
 	var current_y = instance.rotation.y
@@ -48,8 +46,6 @@ func _handle_rotate(event: InputEventMouseButton) -> void:
 func _handle_keys(event: InputEventKey) -> void:
 	if not event.pressed:
 		return
-
-	print("Can place: %s" % [can_place])
 
 	if event.is_action_pressed("key_1") and not placing:
 		_create()
@@ -79,4 +75,11 @@ func _reset(delete: bool) -> void:
 func _create() -> void:
 	if instance: return
 	instance = WashingMachineObject.instantiate()
-	add_child(instance)
+	Game.PlaceRegion.add_child(instance)
+
+func _snap_to_grid(position: Vector3, grid_size: float = 0.1) -> Vector3:
+	return Vector3(
+		snapped(position.x, grid_size),
+		position.y,
+		snapped(position.z, grid_size),
+	)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://blj4vtvx2im5b"]
 
-[ext_resource type="Script" uid="uid://cjjmxe2earg8n" path="res://scripts/washing_machine.gd" id="1_kjuok"]
+[ext_resource type="Script" uid="uid://cjjmxe2earg8n" path="res://scripts/entities/washing_machine.gd" id="1_kjuok"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kjuok"]
-size = Vector3(1.2, 1.8812695, 1.4047523)
+size = Vector3(1.2, 1.558208, 1.4047523)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3yc0x"]
 size = Vector3(1.2, 1.91, 1.33)
@@ -22,7 +22,7 @@ meshes = [NodePath("Area/MeshInstance3D"), NodePath("Area/MeshInstance3D/MeshIns
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
 
 [node name="AreaCollision" type="CollisionShape3D" parent="Area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.014365256, -0.037670255)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17589599, -0.037670255)
 shape = SubResource("BoxShape3D_kjuok")
 
 [node name="StaticBody" type="StaticBody3D" parent="Area"]
@@ -40,21 +40,21 @@ mesh = SubResource("BoxMesh_k44nr")
 skeleton = NodePath("../../..")
 
 [node name="Ray1" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58596313, 0.055, -0.65093845)
-target_position = Vector3(0, -0.09, 0)
-collision_mask = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58596313, 0.015, -0.65093845)
+target_position = Vector3(0, -0.06, 0)
+collision_mask = 3
 
 [node name="Ray2" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, 0.055, -0.651)
-target_position = Vector3(0, -0.09, 0)
-collision_mask = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, 0.015, -0.651)
+target_position = Vector3(0, -0.06, 0)
+collision_mask = 3
 
 [node name="Ray3" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, 0.055, 0.651)
-target_position = Vector3(0, -0.09, 0)
-collision_mask = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586, 0.015, 0.651)
+target_position = Vector3(0, -0.06, 0)
+collision_mask = 3
 
 [node name="Ray4" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.586, 0.055, 0.651)
-target_position = Vector3(0, -0.09, 0)
-collision_mask = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.586, 0.015, 0.651)
+target_position = Vector3(0, -0.06, 0)
+collision_mask = 3
