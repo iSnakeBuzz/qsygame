@@ -18,6 +18,12 @@ size = Vector3(0.35, 0.71, 0.14)
 script = ExtResource("1_kjuok")
 meshes = [NodePath("Area/MeshInstance3D"), NodePath("Area/MeshInstance3D/MeshInstance3D2")]
 
+[node name="LabelName" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+billboard = 2
+text = "Customer Name"
+uppercase = true
+
 [node name="Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
 
@@ -31,6 +37,7 @@ shape = SubResource("BoxShape3D_kjuok")
 shape = SubResource("BoxShape3D_3yc0x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area"]
+layers = 2
 mesh = SubResource("BoxMesh_7jpbw")
 skeleton = NodePath("../..")
 
@@ -38,6 +45,12 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.67)
 mesh = SubResource("BoxMesh_k44nr")
 skeleton = NodePath("../../..")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Area/MeshInstance3D"]
+radius = 1.77
+height = 0.0
+avoidance_layers = 15
+use_3d_avoidance = true
 
 [node name="Ray1" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58596313, 0.015, -0.65093845)
@@ -58,3 +71,6 @@ collision_mask = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.586, 0.015, 0.651)
 target_position = Vector3(0, -0.06, 0)
 collision_mask = 3
+
+[node name="NPCLoc" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.269)

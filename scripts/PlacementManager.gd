@@ -63,6 +63,8 @@ func _place() -> void:
 
 	instance.place()
 	self._reset(false)
+	self._create()
+	placing = true
 
 func _reset(delete: bool) -> void:
 	if delete:
@@ -70,7 +72,7 @@ func _reset(delete: bool) -> void:
 
 	instance = null
 	placing = false
-	target_rotation_y = 0.0
+	# target_rotation_y = 0.0
 
 func _create() -> void:
 	if instance: return

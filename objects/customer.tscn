@@ -10,15 +10,28 @@
 size = Vector3(0.5, 0.15, 0.1)
 
 [node name="Customer" type="CharacterBody3D" node_paths=PackedStringArray("meshes")]
+collision_layer = 0
 script = ExtResource("1_fu7rw")
 speed = 300.0
 meshes = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D/MeshInstance3D")]
+
+[node name="LabelName" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+billboard = 2
+text = "Customer Name"
+uppercase = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
 shape = SubResource("CapsuleShape3D_puyae")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 2.5
+target_desired_distance = 0.5
+avoidance_enabled = true
+use_3d_avoidance = true
+avoidance_layers = 15
+debug_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)

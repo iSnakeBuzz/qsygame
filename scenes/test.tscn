@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ba7lvfvtn5ypc" path="res://scenes/gui.tscn" id="1_74lek"]
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_errlg"]
 [ext_resource type="Texture2D" uid="uid://cxjxvqmf4boxq" path="res://textures/green.png" id="2_bl13t"]
-[ext_resource type="PackedScene" uid="uid://b6im8rh8uv41k" path="res://objects/customer.tscn" id="4_74lek"]
 [ext_resource type="Script" uid="uid://ctfgi3tpp7ohr" path="res://scripts/entities/location.gd" id="5_j5jx5"]
+[ext_resource type="PackedScene" uid="uid://dgnu3avjihku3" path="res://construction/wall.tscn" id="5_lpvoh"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_44saj"]
 ground_color = Color(0.160784, 0.815686, 0.905882, 1)
@@ -22,10 +22,12 @@ ssao_enabled = true
 albedo_texture = ExtResource("2_bl13t")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_iyx0m"]
-vertices = PackedVector3Array(-6.25, 0.75, 6, -4.5, 0.75, 6, -4.75, 0.75, -5.75, -6.5, 0.75, -5.75, -19.25, 0.75, 7.75, -6.75, 0.75, 7.75, -6.75, 0.75, 6.5, -7, 0.75, -6.25, -19.25, 0.75, -7.75, -6.75, 0.75, -7.75, 16, 0.75, 6.5, 15.75, 0.75, 7.75, 19.25, 0.75, 7.75, 19.25, 0.75, -7.75, 15.75, 0.75, -7.75, 16, 0.75, -6.5, 15.5, 0.75, 6, 15.25, 0.75, -5.75, 3.75, 0.75, 6, 3.75, 0.75, -5.75, 1.5, 0.75, 6, 1.5, 0.75, -5.75)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(6, 5, 4), PackedInt32Array(0, 6, 3), PackedInt32Array(3, 6, 7), PackedInt32Array(7, 6, 4), PackedInt32Array(7, 4, 8), PackedInt32Array(8, 9, 7), PackedInt32Array(12, 11, 10), PackedInt32Array(15, 14, 13), PackedInt32Array(10, 16, 12), PackedInt32Array(12, 16, 17), PackedInt32Array(12, 17, 15), PackedInt32Array(12, 15, 13), PackedInt32Array(19, 17, 18), PackedInt32Array(18, 17, 16), PackedInt32Array(20, 1, 21), PackedInt32Array(21, 1, 2)]
-agent_height = 1.9
-agent_radius = 0.75
+vertices = PackedVector3Array(-6.5, 0.6887169, -6, -6.5, 0.6887169, -7.75, -19.25, 0.6887169, -7.75, -19.25, 0.6887169, 7.75, -6.5, 0.6887169, 7.75, -6.25, 0.6887169, 6.25, 1.75, 0.6887169, 6.25, 1.75, 0.6887169, -6, 19.25, 0.6887169, -7.75, 15.5, 0.6887169, -7.75, 15.75, 0.6887169, -6.5, 15.5, 0.6887169, 6.25, 15.5, 0.6887169, 7.75, 19.25, 0.6887169, 7.75, 15.25, 0.6887169, -6, 3.5, 0.6887169, 6.25, 3.5, 0.6887169, -6)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 0), PackedInt32Array(10, 9, 8), PackedInt32Array(13, 12, 11), PackedInt32Array(10, 8, 14), PackedInt32Array(14, 8, 11), PackedInt32Array(11, 8, 13), PackedInt32Array(16, 14, 15), PackedInt32Array(15, 14, 11)]
+sample_partition_type = 2
+agent_height = 2.0
+filter_low_hanging_obstacles = true
+filter_ledge_spans = true
 
 [sub_resource type="GDScript" id="GDScript_74lek"]
 script/source = "extends NavigationRegion3D
@@ -50,9 +52,6 @@ environment = SubResource("Environment_7mbro")
 transform = Transform3D(0.35355335, 0.70710677, 0.61237246, -0.8660254, -2.1855694e-08, 0.49999997, 0.35355335, -0.70710677, 0.61237234, 19.835823, 2, 0)
 shadow_enabled = true
 
-[node name="Customer" parent="." instance=ExtResource("4_74lek")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.29999998, 0)
-
 [node name="terrain" type="Node3D" parent="."]
 
 [node name="Floor2" type="CSGBox3D" parent="terrain"]
@@ -66,28 +65,21 @@ material = SubResource("StandardMaterial3D_iyx0m")
 [node name="QueueFreeLoc" type="Node3D" parent="terrain/Floor2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 script = ExtResource("5_j5jx5")
+locationName = 0
 
 [node name="PlaceRegion" type="NavigationRegion3D" parent="terrain"]
 navigation_mesh = SubResource("NavigationMesh_iyx0m")
+travel_cost = 0.6
 script = SubResource("GDScript_74lek")
 
-[node name="Wall" type="CSGBox3D" parent="terrain/PlaceRegion"]
+[node name="Wall" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 4.442993, 1.9648399, -7)
-use_collision = true
-size = Vector3(21.114014, 0.5, 4.552246)
-material = SubResource("StandardMaterial3D_iyx0m")
 
-[node name="Wall2" type="CSGBox3D" parent="terrain/PlaceRegion"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 4.5, 2.094326, 7)
-use_collision = true
-size = Vector3(21, 0.5, 4.44281)
-material = SubResource("StandardMaterial3D_iyx0m")
+[node name="Wall2" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 4.442993, 1.9648399, 7)
 
-[node name="Wall3" type="CSGBox3D" parent="terrain/PlaceRegion"]
-transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 2.6506176, 2.0600648, -8.219306e-16)
-use_collision = true
-size = Vector3(14, 0.5, 3.8603516)
-material = SubResource("StandardMaterial3D_iyx0m")
+[node name="Wall3" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 4.442993, 1.9648399, 0)
 
 [node name="Floor" type="CSGBox3D" parent="terrain/PlaceRegion"]
 use_collision = true
@@ -99,7 +91,6 @@ material = SubResource("StandardMaterial3D_iyx0m")
 [node name="Teleport" type="Node3D" parent="terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.6, -4.7)
 script = ExtResource("5_j5jx5")
-locationName = 1
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.459961, 4.075924, -0.0874939)

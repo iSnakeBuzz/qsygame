@@ -1,8 +1,6 @@
 extends Node3D
 
-@export var locationName: Game.TeleportLocation
+@export var locationName: Game.TeleportLocation = Game.TeleportLocation.Door
 
 func _ready() -> void:
-	if not locationName:
-		return
-	Game.addLocation(str(locationName), self.position)
+	Game.addLocation(locationName, self.global_position)

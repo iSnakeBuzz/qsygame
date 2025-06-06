@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgnu3avjihku3"]
+
+[ext_resource type="Texture2D" uid="uid://cxjxvqmf4boxq" path="res://textures/green.png" id="1_5fsac"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyx0m"]
+albedo_texture = ExtResource("1_5fsac")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5fsac"]
+size = Vector3(21.105225, 0.5107422, 4.541992)
+
+[node name="Wall" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+use_collision = true
+size = Vector3(21.114014, 0.5, 4.552246)
+material = SubResource("StandardMaterial3D_iyx0m")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_5fsac")
