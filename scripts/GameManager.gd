@@ -38,8 +38,8 @@ func purchaseWashingMachine(machine: WashingMachine) -> bool:
 	return true
 
 func _force_re_bake_async() -> void:
-	# if PlaceRegion and PlaceRegion.navigation_mesh:
-	# 	PlaceRegion.bake_navigation_mesh()
+	if PlaceRegion and PlaceRegion.navigation_mesh:
+		PlaceRegion.bake_navigation_mesh()
 	pass
 
 func getFreeWashingMachine() -> WashingMachine:

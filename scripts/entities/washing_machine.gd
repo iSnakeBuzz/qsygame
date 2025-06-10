@@ -18,7 +18,7 @@ enum WashingStatus {
 @export var meshes: Array[MeshInstance3D]
 @export var status: WashingStatus = WashingStatus.Free
 
-var washingTime: int = 10 # In seconds
+var washingTime: int = 5 # In seconds
 var startedWashingAt: int = 0
 var currentCustomer: Customer = null
 
@@ -76,7 +76,7 @@ func setCurrentCustomer(cust: Customer) -> void:
 	self.currentCustomer = cust
 
 func changeStatus() -> void:
-	labelName.text = "Status: %s | Client: %s" % [getStatus(), getCurrentCustomerName()]
+	labelName.text = "Status: %s | Client: %s | Elapsed: %.2f/5" % [getStatus(), getCurrentCustomerName(), getElapsedTime()]
 
 func getStatus() -> String:
 	if status == WashingStatus.Waiting:
@@ -91,3 +91,6 @@ func getCurrentCustomerName() -> String:
 	if self.currentCustomer:
 		return self.currentCustomer.name
 	return "none"
+
+func getElapsedTime() -> float:
+	return (Time.get_ticks_msec() - startedWashingAt) / 1000.0

@@ -46,12 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.67)
 mesh = SubResource("BoxMesh_k44nr")
 skeleton = NodePath("../../..")
 
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Area/MeshInstance3D"]
-radius = 1.77
-height = 0.0
-avoidance_layers = 15
-use_3d_avoidance = true
-
 [node name="Ray1" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58596313, 0.015, -0.65093845)
 target_position = Vector3(0, -0.06, 0)

@@ -22,12 +22,9 @@ ssao_enabled = true
 albedo_texture = ExtResource("2_bl13t")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_iyx0m"]
-vertices = PackedVector3Array(-6.5, 0.6887169, -6, -6.5, 0.6887169, -7.75, -19.25, 0.6887169, -7.75, -19.25, 0.6887169, 7.75, -6.5, 0.6887169, 7.75, -6.25, 0.6887169, 6.25, 1.75, 0.6887169, 6.25, 1.75, 0.6887169, -6, 19.25, 0.6887169, -7.75, 15.5, 0.6887169, -7.75, 15.75, 0.6887169, -6.5, 15.5, 0.6887169, 6.25, 15.5, 0.6887169, 7.75, 19.25, 0.6887169, 7.75, 15.25, 0.6887169, -6, 3.5, 0.6887169, 6.25, 3.5, 0.6887169, -6)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 0), PackedInt32Array(10, 9, 8), PackedInt32Array(13, 12, 11), PackedInt32Array(10, 8, 14), PackedInt32Array(14, 8, 11), PackedInt32Array(11, 8, 13), PackedInt32Array(16, 14, 15), PackedInt32Array(15, 14, 11)]
+vertices = PackedVector3Array(-19.5, 0.6887169, 8.192993, 3.5, 0.6887169, 8.192993, -6.75, 0.6887169, 7.692993, -6.75, 0.6887169, -7.557007, 3.5, 0.6887169, -8.057007, -19.5, 0.6887169, -8.057007, -6.5, 0.6887169, 6.192993, -6.5, 0.6887169, -6.057007, 3.5, 0.6887169, 6.192993, 3.5, 0.6887169, -6.057007, 15.75, 0.6887169, 7.692993, 5.25, 0.6887169, 8.192993, 19.5, 0.6887169, 8.192993, 19.5, 0.6887169, -8.057007, 5.25, 0.6887169, -8.057007, 15.75, 0.6887169, -7.557007, 15.5, 0.6887169, -6.057007, 15.5, 0.6887169, 6.192993, 5.25, 0.6887169, -6.057007, 5.25, 0.6887169, 6.192993)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(3, 7, 5), PackedInt32Array(5, 7, 6), PackedInt32Array(5, 6, 2), PackedInt32Array(5, 2, 0), PackedInt32Array(7, 9, 6), PackedInt32Array(6, 9, 8), PackedInt32Array(12, 11, 10), PackedInt32Array(15, 14, 13), PackedInt32Array(15, 13, 16), PackedInt32Array(16, 13, 17), PackedInt32Array(17, 13, 10), PackedInt32Array(10, 13, 12), PackedInt32Array(17, 19, 16), PackedInt32Array(16, 19, 18)]
 sample_partition_type = 2
-agent_height = 2.0
-filter_low_hanging_obstacles = true
-filter_ledge_spans = true
 
 [sub_resource type="GDScript" id="GDScript_74lek"]
 script/source = "extends NavigationRegion3D
@@ -89,7 +86,7 @@ size = Vector3(40, 0.5, 17)
 material = SubResource("StandardMaterial3D_iyx0m")
 
 [node name="Teleport" type="Node3D" parent="terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.6, -4.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.26117676, -4.7)
 script = ExtResource("5_j5jx5")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="terrain"]

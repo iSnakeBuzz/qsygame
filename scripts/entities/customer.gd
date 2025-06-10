@@ -1,6 +1,11 @@
 class_name Customer
 extends CharacterBody3D
 
+enum ClientStatus {
+	Waiting,
+	Finished
+}
+
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
 @onready var labelName: Label3D = $LabelName
 
@@ -12,6 +17,7 @@ extends CharacterBody3D
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _timer: float = 0.0
 
+var status: ClientStatus = ClientStatus.Waiting
 var currentMachine: WashingMachine = null
 var cooldown: int = 0
 
@@ -108,6 +114,7 @@ func _handleFinish() -> void:
 	currentMachine.setStatus(WashingMachine.WashingStatus.Free)
 	currentMachine.setCurrentCustomer(null)
 	currentMachine = null
+	status = ClientStatus.Finished
 
 #endregion
 
@@ -117,7 +124,8 @@ func setTarget(target: Vector3) -> void:
 	navigation.target_position = target
 
 func _canRun(delta: float) -> bool:
-	if isOnCooldown(): return false;
+	if status != ClientStatus.Waiting: return false
+	if isOnCooldown(): return false
 
 	_timer += delta
 	if _timer < 1.0:

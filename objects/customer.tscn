@@ -26,9 +26,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
 shape = SubResource("CapsuleShape3D_puyae")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_desired_distance = 2.5
-target_desired_distance = 0.5
+target_desired_distance = 0.1
+path_max_distance = 0.51
+path_postprocessing = 1
 avoidance_enabled = true
+radius = 1.73
 use_3d_avoidance = true
 avoidance_layers = 15
 debug_enabled = true
