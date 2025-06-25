@@ -425,6 +425,9 @@ speed_scale = 4.0
 target_position = Vector3(0, 0, -4)
 collision_mask = 2
 
+[node name="InteractCast" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -4)
+
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15

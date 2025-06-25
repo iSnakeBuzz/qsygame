@@ -5,12 +5,14 @@ enum TeleportLocation {
 	Door
 }
 
-var _PRICES: Dictionary = {
-	"washing_machine": 1000,
-}
+signal ON_MENU_CLOSE
 
+var _mouseVisible: bool = true
 var _locations: Dictionary
+
 var _machines: Array[WashingMachine]
+var _otherEntities: Array[Entity]
+
 var _debug: bool = false
 
 var Player: PlayerController
@@ -23,15 +25,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug"):
 		_debug = !_debug
 
-func purchaseWashingMachine(machine: WashingMachine) -> bool:
-	var price = _PRICES["washing_machine"]
-
+func purchaseEntityObject(entity: Entity, price: int) -> bool:
 	if Money < price:
 		print("You do not have enough money to buy this machine")
 		return false
 
 	Money -= price
-	_machines.append(machine)
+
+	if entity is WashingMachine:
+		_machines.append(entity)
+	else:
+		_otherEntities.append(entity)
 	print("Dinerito updated and machine placed.")
 
 	_force_re_bake_async.call_deferred()
@@ -62,3 +66,14 @@ func getLocation(location: TeleportLocation) -> Vector3:
 
 func addCash(money: int) -> void:
 	self.Money += money
+
+func updateMouse(visible: bool) -> void:
+	if visible:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	_mouseVisible = visible
+
+func closeMenu() -> void:
+	ON_MENU_CLOSE.emit()
+	updateMouse(false)

@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://ceovq00tom121"]
+
+[ext_resource type="Theme" uid="uid://bqb5im8e3cq7u" path="res://ui/default_theme.tres" id="1_305g1"]
+[ext_resource type="Shader" uid="uid://bat41s3c1uw6e" path="res://shaders/blur.gdshader" id="1_sxc0x"]
+[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://ui/build_menu.gd" id="2_58ghd"]
+[ext_resource type="Script" uid="uid://rifn8lordb76" path="res://scripts/items/item_data.gd" id="3_58ghd"]
+[ext_resource type="Texture2D" uid="uid://xhck5ko1xnox" path="res://things/fantasy-ui-borders.svg" id="3_p7bkk"]
+[ext_resource type="Resource" uid="uid://bor6bbn1agavn" path="res://items/test.tres" id="4_60osl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxc0x"]
+shader = ExtResource("1_sxc0x")
+shader_parameter/blur_amount = 5.0000002375
+shader_parameter/num_samples = 64
+shader_parameter/num_rings = 8
+shader_parameter/smoothness = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_58ghd"]
+texture = ExtResource("3_p7bkk")
+texture_margin_left = 14.775438
+texture_margin_top = 15.174666
+texture_margin_right = 14.765353
+texture_margin_bottom = 14.903285
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(39.75569, 225.56747, 48.511887, 48.647034)
+modulate_color = Color(0, 0, 0, 0.52156866)
+
+[node name="BuildMenu" type="PanelContainer"]
+material = SubResource("ShaderMaterial_sxc0x")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_58ghd")
+items = Array[ExtResource("3_58ghd")]([ExtResource("4_60osl")])
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_305g1")
+theme_override_styles/panel = SubResource("StyleBoxTexture_58ghd")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/CenterContainer"]
+custom_minimum_size = Vector2(564, 330)
+layout_mode = 2
+
+[node name="BuildItemsList" type="GridContainer" parent="PanelContainer/CenterContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+columns = 4

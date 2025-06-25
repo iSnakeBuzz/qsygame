@@ -1,0 +1,41 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://banvlado5bgrh"
+path="res://.godot/imported/kenney_input_keyboard_&_mouse.ttf-a08784f16fd5c3a764e864531bc5ac30.fontdata"
+
+[deps]
+
+source_file="res://assets/input_prompts/keyboard_mouse/kenney_input_keyboard_&_mouse.ttf"
+dest_files=["res://.godot/imported/kenney_input_keyboard_&_mouse.ttf-a08784f16fd5c3a764e864531bc5ac30.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=true
+disable_embedded_bitmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=false
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=0
+subpixel_positioning=0
+keep_rounding_remainders=true
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0),
+&"variation_embolden": 0.0
+}]
+language_support={}
+script_support={}
+opentype_features={}

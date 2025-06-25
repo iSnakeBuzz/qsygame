@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bqb5im8e3cq7u"]
+
+[ext_resource type="Texture2D" uid="uid://xhck5ko1xnox" path="res://things/fantasy-ui-borders.svg" id="1_i4llc"]
+[ext_resource type="FontFile" uid="uid://cfbib8goshgl6" path="res://fonts/Inter_Tight/static/InterTight-Bold.ttf" id="1_vos2p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5r0yv"]
+texture = ExtResource("1_i4llc")
+texture_margin_left = 3.366449
+texture_margin_top = 3.4013128
+texture_margin_right = 3.4989164
+texture_margin_bottom = 3.5689266
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(39.73938, 547.7223, 48.694107, 48.731934)
+modulate_color = Color(0, 0, 0, 0.52156866)
+
+[resource]
+default_font = ExtResource("1_vos2p")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_5r0yv")

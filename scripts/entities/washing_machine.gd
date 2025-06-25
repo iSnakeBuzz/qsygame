@@ -1,4 +1,4 @@
-class_name WashingMachine extends Node3D
+class_name WashingMachine extends Entity
 
 enum WashingStatus {
 	Setup,
@@ -14,6 +14,7 @@ enum WashingStatus {
 @onready var labelName: Label3D = $LabelName
 @onready var area: Area3D = $Area
 @onready var raycasts: Array[RayCast3D] = [$Ray1, $Ray2, $Ray3, $Ray4]
+@onready var body: StaticBody3D = $Area/StaticBody
 
 @export var meshes: Array[MeshInstance3D]
 @export var status: WashingStatus = WashingStatus.Free
@@ -24,6 +25,9 @@ var currentCustomer: Customer = null
 
 func _ready() -> void:
 	labelName.text = "Waiting"
+
+	# Disable body collision
+	body.set_collision_layer(0)
 
 func _process(_delta: float) -> void:
 	changeStatus()
@@ -62,6 +66,7 @@ func check_placement() -> bool:
 
 func place() -> void:
 	_clean_placement()
+	body.set_collision_layer(1)
 
 func setStatus(_status: WashingStatus) -> void:
 	var currentMillis = Time.get_ticks_msec()
@@ -76,6 +81,8 @@ func setCurrentCustomer(cust: Customer) -> void:
 	self.currentCustomer = cust
 
 func changeStatus() -> void:
+	var player = Game.Player
+	labelName.visible = player.interact_cast.is_colliding() and player.interact_cast.get_collider() == body
 	labelName.text = "Status: %s | Client: %s | Elapsed: %.2f/5" % [getStatus(), getCurrentCustomerName(), getElapsedTime()]
 
 func getStatus() -> String:

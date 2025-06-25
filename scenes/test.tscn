@@ -76,7 +76,23 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 4.44
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 4.442993, 1.9648399, 7)
 
 [node name="Wall3" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
-transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 4.442993, 1.9648399, 0)
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, -5.557007, 1.9648399, 0)
+
+[node name="Wall4" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 14.442993, 0.18871689, 7.442993)
+size = Vector3(18, 0.5, 1)
+
+[node name="Wall7" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 14.442993, 1.1887169, -5.557007)
+size = Vector3(3, 0.5, 3)
+
+[node name="Wall5" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 14.442993, 2.188717, 4.442993)
+size = Vector3(6, 0.5, 3)
+
+[node name="Wall6" parent="terrain/PlaceRegion" instance=ExtResource("5_lpvoh")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 14.442993, 3.188717, -3.0570068)
+size = Vector3(9, 0.5, 1)
 
 [node name="Floor" type="CSGBox3D" parent="terrain/PlaceRegion"]
 use_collision = true

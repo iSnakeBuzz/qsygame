@@ -1,4 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba7lvfvtn5ypc"]
+[gd_scene load_steps=7 format=3 uid="uid://ba7lvfvtn5ypc"]
+
+[ext_resource type="PackedScene" uid="uid://ceovq00tom121" path="res://ui/build-menu.tscn" id="1_efmwq"]
+[ext_resource type="PackedScene" uid="uid://cahrvgyoycwgo" path="res://ui/key_suggestion.tscn" id="1_mfius"]
+
+[sub_resource type="GDScript" id="GDScript_ynd5l"]
+script/source = "extends CanvasLayer
+
+@onready var menu_container: CenterContainer = $MenuContainer
+
+func _ready() -> void:
+	Game.ON_MENU_CLOSE.connect(self.on_menu_close)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"ui_open\"):
+		menu_container.visible = !menu_container.visible
+		Game.updateMouse(menu_container.visible)
+
+func on_menu_close() -> void:
+	menu_container.visible = false
+"
+
+[sub_resource type="GDScript" id="GDScript_efmwq"]
+script/source = "extends Label
+
+var cachedText: String
+
+func _process(_delta: float) -> void:
+	self.text = \"FPS: %s\" % [Engine.get_frames_per_second()]
+"
 
 [sub_resource type="GDScript" id="GDScript_66xuh"]
 script/source = "extends Label
@@ -9,14 +38,30 @@ func _process(_delta: float) -> void:
 	self.text = \"CASH: %s\" % [Game.Money]
 "
 
-[node name="GUI" type="CanvasLayer"]
+[sub_resource type="GDScript" id="GDScript_mfius"]
+script/source = "extends Label
 
-[node name="MainContainer" type="MarginContainer" parent="."]
+var cachedText: String
+
+func _process(_delta: float) -> void:
+	var collider = Game.Player.interact_cast.get_collider()
+	var name: String
+	
+	if collider != null: 
+		name = collider.name
+	else: 
+		name = \"Unknown\"
+	
+	self.text = \"Collider: %s\" % [name]
+"
+
+[node name="GUI" type="CanvasLayer"]
+script = SubResource("GDScript_ynd5l")
+
+[node name="Debug" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 128.0
-offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
@@ -24,13 +69,71 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug"]
 layout_mode = 2
 
-[node name="TOP" type="HBoxContainer" parent="MainContainer/VBoxContainer"]
+[node name="TOP" type="HBoxContainer" parent="Debug/VBoxContainer"]
 layout_mode = 2
 
-[node name="Money" type="Label" parent="MainContainer/VBoxContainer/TOP"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug/VBoxContainer/TOP"]
+layout_mode = 2
+
+[node name="FPS" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
+layout_mode = 2
+text = "FPS"
+script = SubResource("GDScript_efmwq")
+
+[node name="Money" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
 layout_mode = 2
 text = "Money CASH"
 script = SubResource("GDScript_66xuh")
+
+[node name="Collider" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
+layout_mode = 2
+text = "Collider"
+script = SubResource("GDScript_mfius")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Information" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 79
+alignment = 1
+
+[node name="TabPurchase" parent="MarginContainer/VBoxContainer/Information" instance=ExtResource("1_mfius")]
+layout_mode = 2
+text = "Purchase"
+ui_key = "ui_open"
+text_size = 24
+
+[node name="TabPurchase2" parent="MarginContainer/VBoxContainer/Information" instance=ExtResource("1_mfius")]
+layout_mode = 2
+text = "Purchase"
+ui_key = "ui_open"
+text_size = 24
+debug_key = true
+
+[node name="MenuContainer" type="CenterContainer" parent="."]
+visible = false
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="BuildMenu" parent="MenuContainer" instance=ExtResource("1_efmwq")]
+layout_mode = 2

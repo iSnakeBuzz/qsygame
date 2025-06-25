@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://ybib28uce1f7"]
+
+[ext_resource type="Script" uid="uid://bxxvowbxjrjhu" path="res://ui/item.gd" id="1_fdrdm"]
+[ext_resource type="Theme" uid="uid://bqb5im8e3cq7u" path="res://ui/default_theme.tres" id="1_nxa2r"]
+[ext_resource type="Texture2D" uid="uid://xhck5ko1xnox" path="res://things/fantasy-ui-borders.svg" id="2_fdrdm"]
+[ext_resource type="Texture2D" uid="uid://dgbls5als6w0h" path="res://things/0001.png" id="3_6h18m"]
+[ext_resource type="FontFile" uid="uid://cfbib8goshgl6" path="res://fonts/Inter_Tight/static/InterTight-Bold.ttf" id="4_qbdqg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjg0a"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.10196078, 0.10196078, 0.10196078, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p7bkk"]
+texture = ExtResource("2_fdrdm")
+texture_margin_left = 14.068798
+texture_margin_top = 14.0
+texture_margin_right = 13.903977
+texture_margin_bottom = 14.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(101.91992, 548.0202, 48.07141, 48.07141)
+modulate_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_305g1"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.080783345, 0.080783345, 0.080783345, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_sxc0x"]
+font = ExtResource("4_qbdqg")
+
+[node name="Item" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_jjg0a")
+script = ExtResource("1_fdrdm")
+
+[node name="Hovering" type="PanelContainer" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.78431374)
+z_index = 1
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_nxa2r")
+theme_override_styles/panel = SubResource("StyleBoxTexture_p7bkk")
+
+[node name="ImageMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="ImagePanel" type="PanelContainer" parent="ImageMarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_nxa2r")
+
+[node name="ImageMargin" type="MarginContainer" parent="ImageMarginContainer/ImagePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Image" type="TextureRect" parent="ImageMarginContainer/ImagePanel/ImageMargin"]
+layout_mode = 2
+texture = ExtResource("3_6h18m")
+
+[node name="LabelPanel" type="PanelContainer" parent="."]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+theme = ExtResource("1_nxa2r")
+theme_override_styles/panel = SubResource("StyleBoxFlat_305g1")
+
+[node name="MarginContainer" type="MarginContainer" parent="LabelPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="LabelPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "999"
+label_settings = SubResource("LabelSettings_sxc0x")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

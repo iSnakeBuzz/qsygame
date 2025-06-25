@@ -1,6 +1,6 @@
 extends Node
 
-@onready var WashingMachineObject = preload("res://objects/washing_machine.tscn")
+var WashingMachineObject: PackedScene
 
 var instance: WashingMachine
 var target_rotation_y := 0.0
@@ -8,6 +8,8 @@ var rotation_speed := 25.0
 
 var placing: bool = false
 var can_place: bool = false
+
+var selected_price: int = 0
 
 func _process(_delta: float) -> void:
 	if not Game.Player or not Game.Player.getCollisionWith():
@@ -18,7 +20,8 @@ func _process(_delta: float) -> void:
 	if not instance:
 		return
 
-	instance.transform.origin = _snap_to_grid(collision)
+	# instance.transform.origin = _snap_to_grid(collision)
+	instance.transform.origin = Vector3(collision.x, collision.y, collision.z)
 	can_place = instance.check_placement()
 
 	var current_y = instance.rotation.y
@@ -29,7 +32,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		_handle_rotate(event)
 
-	if event is InputEventKey:
+	if event is InputEventKey or event is InputEventMouseButton:
 		_handle_keys(event)
 
 func _handle_rotate(event: InputEventMouseButton) -> void:
@@ -43,7 +46,7 @@ func _handle_rotate(event: InputEventMouseButton) -> void:
 	elif event.is_action_pressed("action") and can_place and instance:
 		_place()
 
-func _handle_keys(event: InputEventKey) -> void:
+func _handle_keys(event: InputEvent) -> void:
 	if not event.pressed:
 		return
 
@@ -56,7 +59,7 @@ func _handle_keys(event: InputEventKey) -> void:
 		print("Instance destroyed")
 
 func _place() -> void:
-	var purchased = Game.purchaseWashingMachine(instance)
+	var purchased = Game.purchaseEntityObject(instance, selected_price)
 	if not purchased:
 		self._reset(true)
 		return
@@ -72,10 +75,13 @@ func _reset(delete: bool) -> void:
 
 	instance = null
 	placing = false
-	# target_rotation_y = 0.0
 
 func _create() -> void:
 	if instance: return
+	if not WashingMachineObject:
+		push_error("No washing machine object found")
+		return
+
 	instance = WashingMachineObject.instantiate()
 	Game.PlaceRegion.add_child(instance)
 

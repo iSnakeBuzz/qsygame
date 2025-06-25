@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://cahrvgyoycwgo"]
+
+[ext_resource type="Script" uid="uid://bnv04jc7iek55" path="res://ui/key_suggestion.gd" id="1_8al1k"]
+[ext_resource type="FontFile" uid="uid://clgpefaksnhjg" path="res://fonts/Montserrat_Alternates/MontserratAlternates-Medium.ttf" id="1_v1sw7"]
+[ext_resource type="FontFile" uid="uid://dg8qy5mc3lkja" path="res://assets/input_prompts/xbox_series/kenney_input_xbox_series.ttf" id="2_2f8bs"]
+[ext_resource type="FontVariation" uid="uid://d1jtixvdob0o5" path="res://assets/input_prompts/keyboard_mouse/input_keyboard_fix.tres" id="2_8al1k"]
+[ext_resource type="FontFile" uid="uid://banvlado5bgrh" path="res://assets/input_prompts/keyboard_mouse/kenney_input_keyboard_&_mouse.ttf" id="3_nk1uc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynd5l"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+expand_margin_left = 16.0
+expand_margin_top = 9.0
+expand_margin_right = 16.0
+expand_margin_bottom = 7.0
+
+[sub_resource type="GDScript" id="GDScript_b8iy7"]
+script/source = "extends RichTextLabel
+
+func _ready() -> void:
+	self.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+"
+
+[node name="KeySuggestion" type="PanelContainer"]
+use_parent_material = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ynd5l")
+script = ExtResource("1_8al1k")
+fonts = Dictionary[String, Font]({
+"keyboard": ExtResource("3_nk1uc"),
+"xbox": ExtResource("2_2f8bs")
+})
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_v1sw7")
+theme_override_fonts/mono_font = ExtResource("2_8al1k")
+bbcode_enabled = true
+text = "adsdssddsds"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+script = SubResource("GDScript_b8iy7")

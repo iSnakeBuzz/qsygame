@@ -22,6 +22,8 @@ extends CharacterBody3D
 @export var jump_velocity: float = 4.5
 ## How far the player turns when the mouse is moved.
 @export var mouse_sensitivity: float = 0.1
+## How far the player turns when the mouse is moved.
+@export var joycon_sensitivity: float = 20.0
 ## Invert the X axis input for the camera.
 @export var invert_camera_x_axis: bool = false
 ## Invert the Y axis input for the camera.
@@ -138,6 +140,7 @@ var mouseInput: Vector2 = Vector2(0, 0)
 
 #region Raycast Setup
 @onready var ray_cast: RayCast3D = $Head/RayCast
+@onready var interact_cast: RayCast3D = $Head/InteractCast
 
 func getCollisionWith() -> Vector3:
 	if ray_cast.is_colliding():
@@ -173,6 +176,19 @@ func _process(_delta):
 
 	update_debug_menu_per_frame()
 
+	# Joycon Input
+	var joy_input = Vector2(
+		Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
+		Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+	)
+
+	if joy_input.length() > 0.1:
+		mouseInput.x += joy_input.x * joycon_sensitivity * _delta * 60
+		mouseInput.y += joy_input.y * joycon_sensitivity * _delta * 60
+
+
+	handle_head_rotation()
+
 
 func _physics_process(delta): # Most things happen here.
 	# Gravity
@@ -190,7 +206,6 @@ func _physics_process(delta): # Most things happen here.
 
 	handle_movement(delta, input_dir)
 
-	handle_head_rotation()
 
 	# The player is not able to stand up if the ceiling is too low
 	low_ceiling = $CrouchCeilingDetection.is_colliding()
@@ -454,6 +469,7 @@ func update_debug_menu_per_tick():
 
 
 func _unhandled_input(event: InputEvent):
+	# Mouse Movements captured
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mouseInput.x += event.relative.x
 		mouseInput.y += event.relative.y

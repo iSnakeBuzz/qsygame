@@ -1,6 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://blj4vtvx2im5b"]
+[gd_scene load_steps=9 format=3 uid="uid://blj4vtvx2im5b"]
 
 [ext_resource type="Script" uid="uid://cjjmxe2earg8n" path="res://scripts/entities/washing_machine.gd" id="1_kjuok"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kjuok"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_7jpbw"]
+sky_material = SubResource("ProceduralSkyMaterial_kjuok")
+
+[sub_resource type="Environment" id="Environment_k44nr"]
+background_mode = 2
+sky = SubResource("Sky_7jpbw")
+tonemap_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kjuok"]
 size = Vector3(1.2, 1.558208, 1.4047523)
@@ -18,11 +30,13 @@ size = Vector3(0.35, 0.71, 0.14)
 script = ExtResource("1_kjuok")
 meshes = [NodePath("Area/MeshInstance3D"), NodePath("Area/MeshInstance3D/MeshInstance3D2")]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k44nr")
+
 [node name="LabelName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
-billboard = 2
-text = "Customer Name"
-uppercase = true
+billboard = 1
+text = "asd"
 
 [node name="Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
