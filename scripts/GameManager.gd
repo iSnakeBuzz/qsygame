@@ -6,6 +6,7 @@ enum TeleportLocation {
 }
 
 signal ON_MENU_CLOSE
+signal ON_INPUT_DEVICE_CHANGE(device_id: int)
 
 var _mouseVisible: bool = true
 var _locations: Dictionary
@@ -14,12 +15,30 @@ var _machines: Array[WashingMachine]
 var _otherEntities: Array[Entity]
 
 var _debug: bool = false
+var _input_device_id: int = -1
 
 var Player: PlayerController
 var PlaceRegion: NavigationRegion3D
 var Money: int = 9999999
 
-func _input(event: InputEvent) -> void:
+
+func _ready() -> void:
+	Input.connect("joy_connection_changed", self._joy_connection_changed)
+	self.set_process_unhandled_input(true)
+
+func _joy_connection_changed(device_id: int, connected: bool) -> void:
+	if connected:
+		_input_device_id = device_id
+		ON_INPUT_DEVICE_CHANGE.emit(_input_device_id)
+	elif not connected and _input_device_id == device_id:
+		_input_device_id = -1
+		ON_INPUT_DEVICE_CHANGE.emit(_input_device_id)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if (event is InputEventKey and _input_device_id != -1) or (event is InputEventJoypadButton and _input_device_id != 1):
+		_input_device_id = -1 if event is InputEventKey else event.device
+		ON_INPUT_DEVICE_CHANGE.emit(_input_device_id)
+
 	if not event is InputEventKey: return
 
 	if event.is_action_pressed("debug"):

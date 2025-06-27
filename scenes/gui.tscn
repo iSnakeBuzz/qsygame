@@ -1,7 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba7lvfvtn5ypc"]
+[gd_scene load_steps=16 format=3 uid="uid://ba7lvfvtn5ypc"]
 
 [ext_resource type="PackedScene" uid="uid://ceovq00tom121" path="res://ui/build-menu.tscn" id="1_efmwq"]
+[ext_resource type="Texture2D" uid="uid://b8nqunaws12s" path="res://assets/ui/placeholder-image.png" id="1_jqlde"]
 [ext_resource type="PackedScene" uid="uid://cahrvgyoycwgo" path="res://ui/key_suggestion.tscn" id="1_mfius"]
+[ext_resource type="Texture2D" uid="uid://bcwascp8iqphn" path="res://assets/ui/picture-subtract.png" id="2_08a8y"]
+[ext_resource type="FontFile" uid="uid://xxs5cuxf8u74" path="res://fonts/montreal/Montreal-Regular.ttf" id="3_7yii4"]
+[ext_resource type="Texture2D" uid="uid://di240v7r3nas5" path="res://assets/ui/dollar-icon.svg" id="5_08a8y"]
+[ext_resource type="FontFile" uid="uid://dgeka46pm1b8i" path="res://fonts/Cousine/Cousine-Bold.ttf" id="6_7yii4"]
 
 [sub_resource type="GDScript" id="GDScript_ynd5l"]
 script/source = "extends CanvasLayer
@@ -29,15 +34,6 @@ func _process(_delta: float) -> void:
 	self.text = \"FPS: %s\" % [Engine.get_frames_per_second()]
 "
 
-[sub_resource type="GDScript" id="GDScript_66xuh"]
-script/source = "extends Label
-
-var cachedText: String
-
-func _process(_delta: float) -> void:
-	self.text = \"CASH: %s\" % [Game.Money]
-"
-
 [sub_resource type="GDScript" id="GDScript_mfius"]
 script/source = "extends Label
 
@@ -53,6 +49,86 @@ func _process(_delta: float) -> void:
 		name = \"Unknown\"
 	
 	self.text = \"Collider: %s\" % [name]
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yt8u"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.29803923, 0.9764706, 1, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_08a8y"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 0.4627451, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yii4"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.29803923, 1, 0.38039216, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 20
+
+[sub_resource type="FontVariation" id="FontVariation_7yii4"]
+base_font = ExtResource("6_7yii4")
+spacing_bottom = -4
+
+[sub_resource type="GDScript" id="GDScript_08a8y"]
+script/source = "extends Label
+
+var current_displayed_money: float = 0.0
+var target_money: float = 0.0
+var last_displayed_int: int = 0
+const LERP_SPEED = 5.0
+
+func _ready():
+	current_displayed_money = Game.Money
+	target_money = Game.Money
+	last_displayed_int = int(current_displayed_money)
+	self.text = add_commas_to_int(last_displayed_int)
+
+func _process(delta: float) -> void:
+	if target_money != Game.Money:
+		target_money = Game.Money
+
+	if abs(current_displayed_money - target_money) > 0.01:
+		current_displayed_money = lerp(current_displayed_money, target_money, delta * LERP_SPEED)
+	else:
+		current_displayed_money = target_money
+
+	var display_int = int(current_displayed_money)
+	if display_int != last_displayed_int:
+		self.text = add_commas_to_int(display_int)
+		last_displayed_int = display_int
+
+func add_commas_to_int(value: int) -> String:
+	var str_value = str(value)
+	var result = \"\"
+	var count = 0
+	for i in range(str_value.length() - 1, -1, -1):
+		if count > 0 and count % 3 == 0:
+			result = \",\" + result
+		result = str_value[i] + result
+		count += 1
+	return result
 "
 
 [node name="GUI" type="CanvasLayer"]
@@ -83,11 +159,6 @@ layout_mode = 2
 text = "FPS"
 script = SubResource("GDScript_efmwq")
 
-[node name="Money" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
-layout_mode = 2
-text = "Money CASH"
-script = SubResource("GDScript_66xuh")
-
 [node name="Collider" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
 layout_mode = 2
 text = "Collider"
@@ -100,31 +171,129 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 48
-alignment = 1
+alignment = 2
 
 [node name="Information" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 mouse_filter = 2
-theme_override_constants/separation = 79
-alignment = 1
+theme_override_constants/separation = 10
 
-[node name="TabPurchase" parent="MarginContainer/VBoxContainer/Information" instance=ExtResource("1_mfius")]
+[node name="Profile" type="MarginContainer" parent="MarginContainer/VBoxContainer/Information"]
 layout_mode = 2
-text = "Purchase"
-ui_key = "ui_open"
-text_size = 24
 
-[node name="TabPurchase2" parent="MarginContainer/VBoxContainer/Information" instance=ExtResource("1_mfius")]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/Information/Profile"]
 layout_mode = 2
-text = "Purchase"
+
+[node name="Image" type="TextureRect" parent="MarginContainer/VBoxContainer/Information/Profile/CenterContainer"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = ExtResource("1_jqlde")
+expand_mode = 1
+
+[node name="Progress" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/Information/Profile/CenterContainer"]
+layout_mode = 2
+value = 69.0
+fill_mode = 4
+radial_initial_angle = 222.0
+radial_fill_degrees = 278.0
+texture_under = ExtResource("2_08a8y")
+texture_progress = ExtResource("2_08a8y")
+tint_progress = Color(0.21176471, 0.85490197, 1, 1)
+
+[node name="Day" type="PanelContainer" parent="MarginContainer/VBoxContainer/Information/Profile"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_4yt8u")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Information/Profile/Day"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 1
+
+[node name="DaytimeLabel" type="Label" parent="MarginContainer/VBoxContainer/Information/Profile/Day/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.019607844, 0.2784314, 0.2901961, 1)
+theme_override_fonts/font = ExtResource("3_7yii4")
+text = "Día 99999"
+
+[node name="SideContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Information"]
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="TimeContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_08a8y")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer/TimeContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer/TimeContainer/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.34117648, 0.019607844, 1)
+theme_override_fonts/font = ExtResource("3_7yii4")
+text = "10:00 AM"
+
+[node name="TabPurchase" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer" instance=ExtResource("1_mfius")]
+layout_mode = 2
+text = "Store"
 ui_key = "ui_open"
-text_size = 24
-debug_key = true
+icon_scale_ratio = 1.6000000000058208
+bg_color = Color(0.85882354, 0.43137255, 1, 1)
+text_color = Color(0.14509805, 0.011764706, 0.1882353, 1)
+spacing_x = 4
+
+[node name="MoneyContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7yii4")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_08a8y")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.03529412, 0.40392157, 0.078431375, 1)
+theme_override_fonts/font = SubResource("FontVariation_7yii4")
+theme_override_font_sizes/font_size = 24
+text = "999,999,999"
+horizontal_alignment = 2
+vertical_alignment = 2
+clip_text = true
+text_overrun_behavior = 3
+script = SubResource("GDScript_08a8y")
 
 [node name="MenuContainer" type="CenterContainer" parent="."]
 visible = false

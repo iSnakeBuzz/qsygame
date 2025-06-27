@@ -1,9 +1,7 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://pdc0kqrtos21"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8al1k"]
-load_path = "res://.godot/imported/texture.png-610e7a763b3718ebd060a2b169667867.ctex"
+[ext_resource type="Texture2D" uid="uid://co6b7x7xjhq81" path="res://assets/input_prompts/keyboard_mouse/texture.png" id="1_f60e8"]
 
 [resource]
-atlas = SubResource("CompressedTexture2D_8al1k")
+atlas = ExtResource("1_f60e8")
 region = Rect2(384, 128, 64, 64)
-margin = Rect2(-4, -4, -8, -8)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cahrvgyoycwgo"]
+[gd_scene load_steps=9 format=3 uid="uid://cahrvgyoycwgo"]
 
 [ext_resource type="Script" uid="uid://bnv04jc7iek55" path="res://ui/key_suggestion.gd" id="1_8al1k"]
-[ext_resource type="FontFile" uid="uid://clgpefaksnhjg" path="res://fonts/Montserrat_Alternates/MontserratAlternates-Medium.ttf" id="1_v1sw7"]
 [ext_resource type="Texture2D" uid="uid://dsnmgf7o1te6g" path="res://assets/input_prompts/steam_deck/steam_deck_atlas.tres" id="2_2f8bs"]
 [ext_resource type="Texture2D" uid="uid://pdc0kqrtos21" path="res://assets/input_prompts/keyboard_mouse/keyboard-atlas.tres" id="2_jj163"]
 [ext_resource type="Texture2D" uid="uid://c42bbbrrdoibm" path="res://assets/input_prompts/xbox_series/xbox_atlas.tres" id="3_nk1uc"]
+[ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="5_2f8bs"]
+[ext_resource type="FontFile" uid="uid://xxs5cuxf8u74" path="res://fonts/montreal/Montreal-Regular.ttf" id="5_nk1uc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynd5l"]
 content_margin_left = 0.0
@@ -16,10 +17,6 @@ corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
-expand_margin_left = 16.0
-expand_margin_top = 7.0
-expand_margin_right = 16.0
-expand_margin_bottom = 6.0
 
 [sub_resource type="GDScript" id="GDScript_b8iy7"]
 script/source = "extends RichTextLabel
@@ -41,10 +38,20 @@ texture_atlas = Dictionary[int, AtlasTexture]({
 2: ExtResource("2_2f8bs")
 })
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="CenterContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
 
-[node name="IconRect" type="TextureRect" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer"]
 modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
@@ -52,16 +59,17 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 expand_mode = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("1_v1sw7")
+theme_override_fonts/normal_font = ExtResource("5_nk1uc")
+theme_override_fonts/bold_font = ExtResource("5_2f8bs")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "adsdssddsds"
+text = "Tienda"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
