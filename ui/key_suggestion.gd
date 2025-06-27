@@ -172,10 +172,8 @@ func _update_margin_box() -> void:
 	margin_box.add_theme_constant_override("margin_bottom", padding_y)
 
 func _update_hbox_container() -> void:
-	print("Spacing: %s (Exist?: %s)" % [spacing_x, hbox_container])
 	if not hbox_container: return
 	hbox_container.add_theme_constant_override("separation", spacing_x)
-	print("Spacing: %s" % spacing_x)
 
 func _update_current_icon() -> void:
 	for event in InputMap.action_get_events(self.ui_key):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ba7lvfvtn5ypc"]
+[gd_scene load_steps=15 format=3 uid="uid://ba7lvfvtn5ypc"]
 
 [ext_resource type="PackedScene" uid="uid://ceovq00tom121" path="res://ui/build-menu.tscn" id="1_efmwq"]
 [ext_resource type="Texture2D" uid="uid://b8nqunaws12s" path="res://assets/ui/placeholder-image.png" id="1_jqlde"]
@@ -23,15 +23,6 @@ func _input(event: InputEvent) -> void:
 
 func on_menu_close() -> void:
 	menu_container.visible = false
-"
-
-[sub_resource type="GDScript" id="GDScript_efmwq"]
-script/source = "extends Label
-
-var cachedText: String
-
-func _process(_delta: float) -> void:
-	self.text = \"FPS: %s\" % [Engine.get_frames_per_second()]
 "
 
 [sub_resource type="GDScript" id="GDScript_mfius"]
@@ -150,14 +141,10 @@ layout_mode = 2
 
 [node name="TOP" type="HBoxContainer" parent="Debug/VBoxContainer"]
 layout_mode = 2
+alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Debug/VBoxContainer/TOP"]
 layout_mode = 2
-
-[node name="FPS" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
-layout_mode = 2
-text = "FPS"
-script = SubResource("GDScript_efmwq")
 
 [node name="Collider" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
 layout_mode = 2
