@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba7lvfvtn5ypc"]
+[gd_scene load_steps=8 format=3 uid="uid://ba7lvfvtn5ypc"]
 
 [ext_resource type="PackedScene" uid="uid://ceovq00tom121" path="res://ui/build-menu.tscn" id="1_efmwq"]
 [ext_resource type="PackedScene" uid="uid://cahrvgyoycwgo" path="res://ui/key_suggestion.tscn" id="1_mfius"]
@@ -53,6 +53,59 @@ func _process(_delta: float) -> void:
 		name = \"Unknown\"
 	
 	self.text = \"Collider: %s\" % [name]
+"
+
+[sub_resource type="GDScript" id="GDScript_b8iy7"]
+script/source = "extends RichTextLabel
+
+func _ready():
+	read_and_parse_file(\"res://assets/input_prompts/keyboard_mouse/map.txt\")
+
+func read_and_parse_file(file_path: String):
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	if file == null:
+		print(\"Failed to open file: \", file_path)
+		return
+	
+	var second_arguments = []
+	
+	while not file.eof_reached():
+		var line = file.get_line()
+		if line.strip_edges() != \"\":  # Skip empty lines
+			var parsed_value = parse_second_argument(line)
+			if parsed_value != \"\":
+				second_arguments.append(parsed_value)
+				print(\"Second argument: \", parsed_value)
+	
+	file.close()
+	display_in_rows(second_arguments, 7)
+
+func parse_second_argument(line: String) -> String:
+	var parts = line.split(\": \", false, 1)  # Split only on first occurrence
+	if parts.size() >= 2:
+		return parts[1].strip_edges()  # Return second part, trimmed
+	else:
+		print(\"Warning: Line doesn't contain ': ' separator: \", line)
+		return \"\"
+
+func display_in_rows(items: Array, items_per_row: int):
+	var formatted_text = \"\"
+	
+	for i in range(items.size()):
+		# Add the item
+		formatted_text += items[i]
+		
+		# Check if we need to add a separator or line break
+		if (i + 1) % items_per_row == 0:
+			# End of row - add line break
+			formatted_text += \"\\n\"
+		elif i < items.size() - 1:
+			# Not end of row and not last item - add separator
+			formatted_text += \" | \"
+	
+	# Set the formatted text to the RichTextLabel
+	bbcode_enabled = true
+	self.set_text(formatted_text)
 "
 
 [node name="GUI" type="CanvasLayer"]
@@ -125,6 +178,15 @@ text = "Purchase"
 ui_key = "ui_open"
 text_size = 24
 debug_key = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "asdasdasdasdasdasdasd"
+fit_content = true
+autowrap_mode = 0
+script = SubResource("GDScript_b8iy7")
 
 [node name="MenuContainer" type="CenterContainer" parent="."]
 visible = false

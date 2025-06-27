@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bnv04jc7iek55" path="res://ui/key_suggestion.gd" id="1_8al1k"]
 [ext_resource type="FontFile" uid="uid://clgpefaksnhjg" path="res://fonts/Montserrat_Alternates/MontserratAlternates-Medium.ttf" id="1_v1sw7"]
-[ext_resource type="FontFile" uid="uid://dg8qy5mc3lkja" path="res://assets/input_prompts/xbox_series/kenney_input_xbox_series.ttf" id="2_2f8bs"]
-[ext_resource type="FontVariation" uid="uid://d1jtixvdob0o5" path="res://assets/input_prompts/keyboard_mouse/input_keyboard_fix.tres" id="2_8al1k"]
-[ext_resource type="FontFile" uid="uid://banvlado5bgrh" path="res://assets/input_prompts/keyboard_mouse/kenney_input_keyboard_&_mouse.ttf" id="3_nk1uc"]
+[ext_resource type="Texture2D" uid="uid://dsnmgf7o1te6g" path="res://assets/input_prompts/steam_deck/steam_deck_atlas.tres" id="2_2f8bs"]
+[ext_resource type="Texture2D" uid="uid://pdc0kqrtos21" path="res://assets/input_prompts/keyboard_mouse/keyboard-atlas.tres" id="2_jj163"]
+[ext_resource type="Texture2D" uid="uid://c42bbbrrdoibm" path="res://assets/input_prompts/xbox_series/xbox_atlas.tres" id="3_nk1uc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynd5l"]
 content_margin_left = 0.0
@@ -17,9 +17,9 @@ corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 expand_margin_left = 16.0
-expand_margin_top = 9.0
+expand_margin_top = 7.0
 expand_margin_right = 16.0
-expand_margin_bottom = 7.0
+expand_margin_bottom = 6.0
 
 [sub_resource type="GDScript" id="GDScript_b8iy7"]
 script/source = "extends RichTextLabel
@@ -35,19 +35,31 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ynd5l")
 script = ExtResource("1_8al1k")
-fonts = Dictionary[String, Font]({
-"keyboard": ExtResource("3_nk1uc"),
-"xbox": ExtResource("2_2f8bs")
+texture_atlas = Dictionary[int, AtlasTexture]({
+0: ExtResource("2_jj163"),
+1: ExtResource("3_nk1uc"),
+2: ExtResource("2_2f8bs")
 })
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="IconRect" type="TextureRect" parent="HBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("1_v1sw7")
-theme_override_fonts/mono_font = ExtResource("2_8al1k")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "adsdssddsds"
 fit_content = true
