@@ -195,7 +195,7 @@ func _physics_process(delta): # Most things happen here.
 
 	var input_dir = Vector2.ZERO
 
-	if not immobile: # Immobility works by interrupting user input, so other forces can still be applied to the player
+	if not immobile and Input.mouse_mode != Input.MOUSE_MODE_VISIBLE: # Immobility works by interrupting user input, so other forces can still be applied to the player
 		input_dir = Input.get_vector(controls.LEFT, controls.RIGHT, controls.FORWARD, controls.BACKWARD)
 
 	handle_movement(delta, input_dir)
@@ -390,7 +390,7 @@ func initialize_animations():
 	CROUCH_ANIMATION.play("RESET")
 
 func play_headbob_animation(moving):
-	if moving and is_on_floor():
+	if moving and is_on_floor() and Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
 		var use_headbob_animation: String
 		match state:
 			"normal", "crouching":
