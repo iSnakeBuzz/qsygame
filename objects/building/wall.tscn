@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ehigg3hlb4yx"]
+
+[ext_resource type="PackedScene" uid="uid://drvrv1rybueq6" path="res://assets/models/living_room_props/Wall.glb" id="1_2t2gp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bbsjt"]
+size = Vector3(0.58374023, 3.9709473, 0.5996094)
+
+[node name="Wall" instance=ExtResource("1_2t2gp")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003172338, 2.0054321, 0.10003662)
+transparency = 1.0
+use_collision = true
+size = Vector3(1.9882813, 3.9925537, 0.5897217)
+
+[node name="Area3D" type="Area3D" parent="CSGBox3D" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/Area3D" index="0"]
+shape = SubResource("BoxShape3D_bbsjt")

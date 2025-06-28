@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj2iipy4qb6ft"]
+
+[ext_resource type="PackedScene" uid="uid://3ic27fxoo81t" path="res://assets/models/living_room_props/RightCornerWall.glb" id="1_wbx3j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbx3j"]
+size = Vector3(0.58374023, 3.9709473, 0.5996094)
+
+[node name="RightCornerWall" instance=ExtResource("1_wbx3j")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="1"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.095919155, 2.0054321, 0.8984909)
+transparency = 1.0
+use_collision = true
+size = Vector3(2.1822357, 3.9925537, 0.5897217)
+
+[node name="Area3D" type="Area3D" parent="CSGBox3D" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/Area3D" index="0"]
+shape = SubResource("BoxShape3D_wbx3j")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." index="2"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.70162654, 2.0054321, 0.10728977)
+transparency = 1.0
+use_collision = true
+size = Vector3(0.60546875, 3.9925537, 0.5897217)
+
+[node name="Area3D" type="Area3D" parent="CSGBox3D2" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D2/Area3D" index="0"]
+shape = SubResource("BoxShape3D_wbx3j")

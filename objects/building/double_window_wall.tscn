@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfc3rauomqr0g"]
+
+[ext_resource type="PackedScene" uid="uid://0v5nlnn55dv1" path="res://assets/models/living_room_props/WindowWall.glb" id="1_bgjsr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_02lpf"]
+size = Vector3(3.9960938, 3.9709473, 0.5996094)
+
+[node name="WindowWall" instance=ExtResource("1_bgjsr")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005018808, 2.0054321, 0.10003662)
+transparency = 1.0
+use_collision = true
+size = Vector3(4, 4, 0.59)
+
+[node name="Area3D" type="Area3D" parent="CSGBox3D" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/Area3D" index="0"]
+shape = SubResource("BoxShape3D_02lpf")
