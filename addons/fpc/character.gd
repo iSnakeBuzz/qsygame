@@ -66,8 +66,7 @@ extends CharacterBody3D
 	JUMP = "ui_accept",
 	CROUCH = "crouch",
 	SPRINT = "sprint",
-	PAUSE = "ui_cancel"
-	}
+}
 @export_subgroup("Controller Specific")
 ## This only affects how the camera is handled, the rest should be covered by adding controller inputs to the existing actions in the Input Map.
 @export var controller_support: bool = false
@@ -77,7 +76,7 @@ extends CharacterBody3D
 	LOOK_RIGHT = "look_right",
 	LOOK_UP = "look_up",
 	LOOK_DOWN = "look_down"
-	}
+}
 ## The sensitivity of the analog stick that controls camera rotation. Lower is less sensitive and higher is more sensitive.
 @export_range(0.001, 1, 0.001) var look_sensitivity: float = 0.035
 
@@ -108,8 +107,6 @@ extends CharacterBody3D
 @export var view_bobbing: bool = true
 ## Enables an immersive animation when the player jumps and hits the ground.
 @export var jump_animation: bool = true
-## This determines wether the player can use the pause button, not wether the game will actually pause.
-@export var pausing_enabled: bool = true
 ## Use with caution.
 @export var gravity_enabled: bool = true
 ## If your game changes the gravity value during gameplay, check this property to allow the player to experience the change in gravity.
@@ -171,9 +168,6 @@ func _ready():
 
 
 func _process(_delta):
-	if pausing_enabled:
-		handle_pausing()
-
 	update_debug_menu_per_frame()
 
 	# Joycon Input
@@ -307,9 +301,6 @@ func check_controls(): # If you add a control, you might want to add a check for
 	if !InputMap.has_action(controls.BACKWARD):
 		push_error("No control mapped for move backward. Please add an input map control. Disabling movement.")
 		immobile = true
-	if !InputMap.has_action(controls.PAUSE):
-		push_error("No control mapped for pause. Please add an input map control. Disabling pausing.")
-		pausing_enabled = false
 	if !InputMap.has_action(controls.CROUCH):
 		push_error("No control mapped for crouch. Please add an input map control. Disabling crouching.")
 		crouch_enabled = false
@@ -498,16 +489,5 @@ func update_camera_fov():
 		CAMERA.fov = lerp(CAMERA.fov, 85.0, 0.3)
 	else:
 		CAMERA.fov = lerp(CAMERA.fov, 75.0, 0.3)
-
-func handle_pausing():
-	if Input.is_action_just_pressed(controls.PAUSE):
-		# You may want another node to handle pausing, because this player may get paused too.
-		match Input.mouse_mode:
-			Input.MOUSE_MODE_CAPTURED:
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-				#get_tree().paused = false
-			Input.MOUSE_MODE_VISIBLE:
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-				#get_tree().paused = false
 
 #endregion
