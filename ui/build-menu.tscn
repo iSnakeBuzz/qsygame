@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ceovq00tom121"]
+[gd_scene load_steps=6 format=3 uid="uid://ceovq00tom121"]
 
 [ext_resource type="Theme" uid="uid://bqb5im8e3cq7u" path="res://ui/default_theme.tres" id="1_305g1"]
 [ext_resource type="Shader" uid="uid://bat41s3c1uw6e" path="res://shaders/blur.gdshader" id="1_sxc0x"]
-[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://ui/build_menu.gd" id="2_58ghd"]
-[ext_resource type="Script" uid="uid://rifn8lordb76" path="res://scripts/items/item_data.gd" id="3_58ghd"]
 [ext_resource type="Texture2D" uid="uid://xhck5ko1xnox" path="res://things/fantasy-ui-borders.svg" id="3_p7bkk"]
-[ext_resource type="Resource" uid="uid://bor6bbn1agavn" path="res://items/test.tres" id="4_60osl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxc0x"]
 shader = ExtResource("1_sxc0x")
@@ -36,8 +33,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_58ghd")
-items = Array[ExtResource("3_58ghd")]([ExtResource("4_60osl")])
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

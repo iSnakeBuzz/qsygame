@@ -28,6 +28,7 @@ func _ready() -> void:
 	_apply_random_color()
 	_agent_setup.call_deferred()
 	labelName.text = self.name
+	navigation.velocity_computed.connect(_on_velocity_computed)
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -36,25 +37,41 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor() and gravity and gravity_enabled:
 		velocity.y -= gravity * delta
 
-	if not navigation.is_target_reached():
-		var target = navigation.get_next_path_position()
-		target.y = 0 # Remove Y velocity due to Gravity
+	if navigation.is_navigation_finished():
+		return
 
-		velocity = global_transform.origin.direction_to(target) * speed * delta
-		
-		var origin = global_transform.origin
-		var target_pos = Vector3(target.x, origin.y, target.z)
+	var current_position = global_position
+	var target = navigation.get_next_path_position()
+	target.y = 0 # Remove Y velocity due to Gravity
 
-		if not origin.is_equal_approx(target_pos):
-			look_at(target_pos, Vector3.UP)
+	var _velocity = current_position.direction_to(target) * speed * delta
+	var target_pos = Vector3(target.x, current_position.y, target.z)
 
+	if not current_position.is_equal_approx(target_pos):
+		look_at(target_pos, Vector3.UP)
+
+	if navigation.avoidance_enabled:
+		navigation.set_velocity(_velocity)
+	else:
 		move_and_slide()
-	
+
+func _update_label() -> void:
+	labelName.text = "[%s] %s : Reached: %s" % [self.name, self.status, self.navigation.is_target_reached()]
+#endregion
+
+#region Navigation
+
+func _on_velocity_computed(safe_velocity: Vector3) -> void:
+	velocity = safe_velocity
+	move_and_slide()
+
 #endregion
 
 #region Customer Logic
 
 func _process(delta: float) -> void:
+	_update_label()
+
 	var canRun = _canRun(delta);
 	if not canRun: return
 
@@ -65,9 +82,9 @@ func _process(delta: float) -> void:
 	_handleNewMachineLogic()
 
 func _handleCurrentMachineLogic() -> void:
-	var is_navigating = not navigation.is_navigation_finished() and not navigation.is_target_reached()
-		
-	if currentMachine.status == currentMachine.WashingStatus.Finished and not is_navigating:
+	var navigating = not navigation.is_navigation_finished() and not navigation.is_target_reached()
+
+	if not navigating and currentMachine != null and currentMachine.status == WashingMachine.WashingStatus.Finished:
 		setTarget(Game.getLocation(Game.TeleportLocation.Door))
 
 	pass

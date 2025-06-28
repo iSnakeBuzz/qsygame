@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2hrnqwoje3ar"]
+
+[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://ui/build_menu.gd" id="1_6u367"]
+[ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="1_tgyje"]
+[ext_resource type="Script" uid="uid://rifn8lordb76" path="res://scripts/items/item_data.gd" id="2_cafnd"]
+[ext_resource type="Resource" uid="uid://bor6bbn1agavn" path="res://items/test.tres" id="3_l8crj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p54wi"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.99607843, 0.8627451, 0.43529412, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_detail = 20
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xki8e"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.9098039, 0.74509805, 0.34509805, 1)
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+corner_detail = 20
+shadow_color = Color(0, 0, 0, 0)
+
+[node name="StoreMenu" type="HBoxContainer"]
+alignment = 2
+script = ExtResource("1_6u367")
+items = Array[ExtResource("2_cafnd")]([ExtResource("3_l8crj")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p54wi")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Header"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="VBoxContainer/Header/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.5254902, 0.38431373, 0.16470589, 1)
+theme_override_fonts/font = ExtResource("1_tgyje")
+theme_override_font_sizes/font_size = 32
+text = "Shop"
+
+[node name="Content" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_xki8e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content"]
+layout_mode = 2
+theme_override_constants/separation = 0

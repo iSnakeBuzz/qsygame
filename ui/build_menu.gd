@@ -1,8 +1,8 @@
 class_name BuildMenu
-extends PanelContainer
+extends HBoxContainer
 
 @onready var BuildItemPreload = preload("res://ui/item.tscn")
-@onready var building_grid: GridContainer = $PanelContainer/CenterContainer/ScrollContainer/BuildItemsList
+@onready var building_grid: VBoxContainer = $VBoxContainer/Content/VBoxContainer
 
 @export var items: Array[ItemData]
 

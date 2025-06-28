@@ -30,6 +30,10 @@ size = Vector3(0.35, 0.71, 0.14)
 script = ExtResource("1_kjuok")
 meshes = [NodePath("Area/MeshInstance3D"), NodePath("Area/MeshInstance3D/MeshInstance3D2")]
 
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+height = 1.95
+vertices = PackedVector3Array(-0.6072017, 0, 0.6713153, -0.606055, 0, -0.7449922, 0.60623384, 0, -0.7430801, 0.6045221, 0, 0.6716417)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k44nr")
 

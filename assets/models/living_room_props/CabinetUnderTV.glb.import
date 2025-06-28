@@ -1,0 +1,50 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://c4yducy0hm5lf"
+path="res://.godot/imported/CabinetUnderTV.glb-d5bf62023b5dcb8640e0f8d7691743dd.scn"
+
+[deps]
+
+source_file="res://assets/models/living_room_props/CabinetUnderTV.glb"
+dest_files=["res://.godot/imported/CabinetUnderTV.glb-d5bf62023b5dcb8640e0f8d7691743dd.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=2
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"nodes": {
+"PATH:CabinetUnderTV": {
+"generate/physics": true,
+"physics/physics_material_override": Resource("uid://cq81i17dwv8pu", "res://assets/materials/friction_less_material.tres"),
+"physics/shape_type": 1
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=3

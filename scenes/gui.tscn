@@ -1,28 +1,49 @@
-[gd_scene load_steps=15 format=3 uid="uid://ba7lvfvtn5ypc"]
+[gd_scene load_steps=19 format=3 uid="uid://ba7lvfvtn5ypc"]
 
-[ext_resource type="PackedScene" uid="uid://ceovq00tom121" path="res://ui/build-menu.tscn" id="1_efmwq"]
 [ext_resource type="Texture2D" uid="uid://b8nqunaws12s" path="res://assets/ui/placeholder-image.png" id="1_jqlde"]
 [ext_resource type="PackedScene" uid="uid://cahrvgyoycwgo" path="res://ui/key_suggestion.tscn" id="1_mfius"]
 [ext_resource type="Texture2D" uid="uid://bcwascp8iqphn" path="res://assets/ui/picture-subtract.png" id="2_08a8y"]
 [ext_resource type="FontFile" uid="uid://xxs5cuxf8u74" path="res://fonts/montreal/Montreal-Regular.ttf" id="3_7yii4"]
 [ext_resource type="Texture2D" uid="uid://di240v7r3nas5" path="res://assets/ui/dollar-icon.svg" id="5_08a8y"]
 [ext_resource type="FontFile" uid="uid://dgeka46pm1b8i" path="res://fonts/Cousine/Cousine-Bold.ttf" id="6_7yii4"]
+[ext_resource type="PackedScene" uid="uid://c2hrnqwoje3ar" path="res://ui/store_menu.tscn" id="7_4yt8u"]
 
 [sub_resource type="GDScript" id="GDScript_ynd5l"]
 script/source = "extends CanvasLayer
 
-@onready var menu_container: CenterContainer = $MenuContainer
+@onready var menu_container = $MenuContainer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	Game.ON_MENU_CLOSE.connect(self.on_menu_close)
+	animation_player.animation_finished.connect(self._on_animation_finished)
+	animation_player.animation_started.connect(self._on_animation_started)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(\"ui_open\"):
-		menu_container.visible = !menu_container.visible
-		Game.updateMouse(menu_container.visible)
+		_play_animation()
 
 func on_menu_close() -> void:
-	menu_container.visible = false
+	animation_player.play(\"shop_close\")
+
+func _play_animation() -> void:
+	print(\"What is: %s\" % menu_container.visible)
+	if not menu_container.visible:
+		animation_player.play(\"shop_open\")
+	else:
+		animation_player.play(\"shop_close\")
+
+func _on_animation_started(anim_name: String) -> void:
+	if anim_name == \"shop_open\":
+		menu_container.visible = true
+	
+	Game.updateMouse(menu_container.visible)
+
+func _on_animation_finished(anim_name: String) -> void:
+	if anim_name == \"shop_close\":
+		menu_container.visible = false
+	
+	Game.updateMouse(menu_container.visible)
 "
 
 [sub_resource type="GDScript" id="GDScript_mfius"]
@@ -32,14 +53,14 @@ var cachedText: String
 
 func _process(_delta: float) -> void:
 	var collider = Game.Player.interact_cast.get_collider()
-	var name: String
+	var _name: String
 	
 	if collider != null: 
-		name = collider.name
+		_name = collider.name
 	else: 
-		name = \"Unknown\"
+		_name = \"Unknown\"
 	
-	self.text = \"Collider: %s\" % [name]
+	self.text = \"Collider: %s\" % [_name]
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yt8u"]
@@ -122,6 +143,92 @@ func add_commas_to_int(value: int) -> String:
 	return result
 "
 
+[sub_resource type="Animation" id="Animation_7yii4"]
+resource_name = "shop_open"
+length = 0.3
+step = 0.0333333
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuContainer:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1280, 0, 0, 0.16666667, -71, 854, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MenuContainer:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.16666667, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_4yt8u"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuContainer:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(854, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MenuContainer:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_p54wi"]
+resource_name = "shop_close"
+length = 0.3
+step = 0.0333333
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuContainer:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(854, -0.15, 0, 0.15, 0, 1280, -0.050000004, -71.00001, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MenuContainer:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 0, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xki8e"]
+_data = {
+&"RESET": SubResource("Animation_4yt8u"),
+&"shop_close": SubResource("Animation_p54wi"),
+&"shop_open": SubResource("Animation_7yii4")
+}
+
 [node name="GUI" type="CanvasLayer"]
 script = SubResource("GDScript_ynd5l")
 
@@ -151,7 +258,7 @@ layout_mode = 2
 text = "Collider"
 script = SubResource("GDScript_mfius")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="HUD" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -163,31 +270,31 @@ theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 48
 alignment = 2
 
-[node name="Information" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Information" type="HBoxContainer" parent="HUD/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 10
 
-[node name="Profile" type="MarginContainer" parent="MarginContainer/VBoxContainer/Information"]
+[node name="Profile" type="MarginContainer" parent="HUD/VBoxContainer/Information"]
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/Information/Profile"]
+[node name="CenterContainer" type="CenterContainer" parent="HUD/VBoxContainer/Information/Profile"]
 layout_mode = 2
 
-[node name="Image" type="TextureRect" parent="MarginContainer/VBoxContainer/Information/Profile/CenterContainer"]
+[node name="Image" type="TextureRect" parent="HUD/VBoxContainer/Information/Profile/CenterContainer"]
 custom_minimum_size = Vector2(130, 130)
 layout_mode = 2
 texture = ExtResource("1_jqlde")
 expand_mode = 1
 
-[node name="Progress" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/Information/Profile/CenterContainer"]
+[node name="Progress" type="TextureProgressBar" parent="HUD/VBoxContainer/Information/Profile/CenterContainer"]
 layout_mode = 2
 value = 69.0
 fill_mode = 4
@@ -197,49 +304,51 @@ texture_under = ExtResource("2_08a8y")
 texture_progress = ExtResource("2_08a8y")
 tint_progress = Color(0.21176471, 0.85490197, 1, 1)
 
-[node name="Day" type="PanelContainer" parent="MarginContainer/VBoxContainer/Information/Profile"]
+[node name="Day" type="PanelContainer" parent="HUD/VBoxContainer/Information/Profile"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_4yt8u")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Information/Profile/Day"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/Information/Profile/Day"]
+custom_minimum_size = Vector2(105, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 1
 
-[node name="DaytimeLabel" type="Label" parent="MarginContainer/VBoxContainer/Information/Profile/Day/MarginContainer"]
+[node name="DaytimeLabel" type="Label" parent="HUD/VBoxContainer/Information/Profile/Day/MarginContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.019607844, 0.2784314, 0.2901961, 1)
 theme_override_fonts/font = ExtResource("3_7yii4")
 text = "Día 99999"
+horizontal_alignment = 1
 
-[node name="SideContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Information"]
+[node name="SideContainer" type="VBoxContainer" parent="HUD/VBoxContainer/Information"]
 layout_mode = 2
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/Information/SideContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="TimeContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer"]
+[node name="TimeContainer" type="PanelContainer" parent="HUD/VBoxContainer/Information/SideContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_08a8y")
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer/TimeContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HUD/VBoxContainer/Information/SideContainer/HBoxContainer/TimeContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer/TimeContainer/CenterContainer"]
+[node name="Label" type="Label" parent="HUD/VBoxContainer/Information/SideContainer/HBoxContainer/TimeContainer/CenterContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38431373, 0.34117648, 0.019607844, 1)
 theme_override_fonts/font = ExtResource("3_7yii4")
 text = "10:00 AM"
 
-[node name="TabPurchase" parent="MarginContainer/VBoxContainer/Information/SideContainer/HBoxContainer" instance=ExtResource("1_mfius")]
+[node name="TabPurchase" parent="HUD/VBoxContainer/Information/SideContainer/HBoxContainer" instance=ExtResource("1_mfius")]
 layout_mode = 2
 text = "Store"
 ui_key = "ui_open"
@@ -248,27 +357,27 @@ bg_color = Color(0.85882354, 0.43137255, 1, 1)
 text_color = Color(0.14509805, 0.011764706, 0.1882353, 1)
 spacing_x = 4
 
-[node name="MoneyContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer"]
+[node name="MoneyContainer" type="PanelContainer" parent="HUD/VBoxContainer/Information/SideContainer"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7yii4")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/Information/SideContainer/MoneyContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 18
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HUD/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("5_08a8y")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HUD/VBoxContainer/Information/SideContainer/MoneyContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -282,15 +391,25 @@ clip_text = true
 text_overrun_behavior = 3
 script = SubResource("GDScript_08a8y")
 
-[node name="MenuContainer" type="CenterContainer" parent="."]
+[node name="MenuContainer" type="MarginContainer" parent="."]
 visible = false
-z_index = 5
-anchors_preset = 15
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_left = -426.0
+offset_right = 0.00024414063
+grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 0
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
 
-[node name="BuildMenu" parent="MenuContainer" instance=ExtResource("1_efmwq")]
+[node name="StoreMenu" parent="MenuContainer" instance=ExtResource("7_4yt8u")]
 layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xki8e")
+}

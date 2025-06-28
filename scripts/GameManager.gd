@@ -25,6 +25,7 @@ var Money: int = 9999999
 func _ready() -> void:
 	Input.connect("joy_connection_changed", self._joy_connection_changed)
 	self.set_process_unhandled_input(true)
+	_hook_discord()
 
 func _joy_connection_changed(device_id: int, connected: bool) -> void:
 	if connected:
@@ -73,9 +74,10 @@ func getFreeWashingMachine() -> WashingMachine:
 	return null
 
 func teleportTo(entity: Node3D, location: TeleportLocation) -> void:
+	entity.visible = false
 	var position: Vector3 = getLocation(location)
-
 	entity.position = position
+	entity.visible = true
 
 func addLocation(location: TeleportLocation, position: Vector3) -> void:
 	_locations.set(str(location).to_lower(), position)
@@ -96,3 +98,22 @@ func updateMouse(visible: bool) -> void:
 func closeMenu() -> void:
 	ON_MENU_CLOSE.emit()
 	updateMouse(false)
+
+func _hook_discord() -> void:
+	# Application ID
+	DiscordRPC.app_id = 1388388422036754472
+	# this is boolean if everything worked
+	print("Discord working: " + str(DiscordRPC.get_is_discord_working()))
+	# Set the first custom text row of the activity here
+	DiscordRPC.details = "-"
+	# Set the second custom text row of the activity here
+	DiscordRPC.state = "a"
+	# Image key for small image from "Art Assets" from the Discord Developer website
+	# "02:41 elapsed" timestamp for the activity
+	DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
+	# "59:59 remaining" timestamp for the activity
+	DiscordRPC.end_timestamp = int(Time.get_unix_time_from_system()) + 3600
+	# Always refresh after changing the values!
+	DiscordRPC.refresh()
+
+	print("Discord: %s " % DiscordRPC.get_current_user())

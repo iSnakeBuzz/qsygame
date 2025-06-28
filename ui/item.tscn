@@ -1,106 +1,137 @@
 [gd_scene load_steps=10 format=3 uid="uid://ybib28uce1f7"]
 
 [ext_resource type="Script" uid="uid://bxxvowbxjrjhu" path="res://ui/item.gd" id="1_fdrdm"]
-[ext_resource type="Theme" uid="uid://bqb5im8e3cq7u" path="res://ui/default_theme.tres" id="1_nxa2r"]
-[ext_resource type="Texture2D" uid="uid://xhck5ko1xnox" path="res://things/fantasy-ui-borders.svg" id="2_fdrdm"]
 [ext_resource type="Texture2D" uid="uid://dgbls5als6w0h" path="res://things/0001.png" id="3_6h18m"]
-[ext_resource type="FontFile" uid="uid://cfbib8goshgl6" path="res://fonts/Inter_Tight/static/InterTight-Bold.ttf" id="4_qbdqg"]
+[ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="3_fdrdm"]
+[ext_resource type="Texture2D" uid="uid://di240v7r3nas5" path="res://assets/ui/dollar-icon.svg" id="4_6h18m"]
+[ext_resource type="FontFile" uid="uid://dgeka46pm1b8i" path="res://fonts/Cousine/Cousine-Bold.ttf" id="5_qbdqg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjg0a"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdrdm"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.10196078, 0.10196078, 0.10196078, 0)
+bg_color = Color(0.78, 0.61204, 0.2496, 0)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p7bkk"]
-texture = ExtResource("2_fdrdm")
-texture_margin_left = 14.068798
-texture_margin_top = 14.0
-texture_margin_right = 13.903977
-texture_margin_bottom = 14.0
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-region_rect = Rect2(101.91992, 548.0202, 48.07141, 48.07141)
-modulate_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_305g1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h18m"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.080783345, 0.080783345, 0.080783345, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+bg_color = Color(0.99607843, 0.972549, 0.90588236, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 corner_detail = 5
 
-[sub_resource type="LabelSettings" id="LabelSettings_sxc0x"]
-font = ExtResource("4_qbdqg")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hai2l"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.4392157, 0.92941177, 0.38039216, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 20
+
+[sub_resource type="FontVariation" id="FontVariation_f37ge"]
+base_font = ExtResource("5_qbdqg")
+spacing_bottom = -4
 
 [node name="Item" type="PanelContainer"]
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjg0a")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fdrdm")
 script = ExtResource("1_fdrdm")
 
-[node name="Hovering" type="PanelContainer" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.78431374)
-z_index = 1
+[node name="PanelContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("1_nxa2r")
-theme_override_styles/panel = SubResource("StyleBoxTexture_p7bkk")
-
-[node name="ImageMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = 1
-
-[node name="ImagePanel" type="PanelContainer" parent="ImageMarginContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("1_nxa2r")
-
-[node name="ImageMargin" type="MarginContainer" parent="ImageMarginContainer/ImagePanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="Image" type="TextureRect" parent="ImageMarginContainer/ImagePanel/ImageMargin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ImageCN" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_6h18m")
+
+[node name="ImageMargin" type="MarginContainer" parent="PanelContainer/HBoxContainer/ImageCN"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Image" type="TextureRect" parent="PanelContainer/HBoxContainer/ImageCN/ImageMargin"]
 layout_mode = 2
 texture = ExtResource("3_6h18m")
 
-[node name="LabelPanel" type="PanelContainer" parent="."]
-z_index = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
+alignment = 1
+
+[node name="ItemName" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 mouse_filter = 1
-theme = ExtResource("1_nxa2r")
-theme_override_styles/panel = SubResource("StyleBoxFlat_305g1")
+theme_override_fonts/font = ExtResource("3_fdrdm")
+theme_override_font_sizes/font_size = 18
+text = "Machine asd asd asd asd"
 
-[node name="MarginContainer" type="MarginContainer" parent="LabelPanel"]
+[node name="MoneyContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_hai2l")
 
-[node name="Label" type="Label" parent="LabelPanel/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/MoneyContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/MoneyContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer/MoneyContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(9.33, 16)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "999"
-label_settings = SubResource("LabelSettings_sxc0x")
+size_flags_vertical = 4
+texture = ExtResource("4_6h18m")
+expand_mode = 1
+
+[node name="MoneyLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/MoneyContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.03529412, 0.40392157, 0.078431375, 1)
+theme_override_fonts/font = SubResource("FontVariation_f37ge")
+text = "999,999,999"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
