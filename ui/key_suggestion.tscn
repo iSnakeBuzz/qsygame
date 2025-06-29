@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cahrvgyoycwgo"]
 
-[ext_resource type="Script" uid="uid://bnv04jc7iek55" path="res://ui/key_suggestion.gd" id="1_8al1k"]
+[ext_resource type="Script" uid="uid://bnv04jc7iek55" path="res://scripts/keys/key_suggestion.gd" id="1_8al1k"]
 [ext_resource type="Texture2D" uid="uid://dsnmgf7o1te6g" path="res://assets/input_prompts/steam_deck/steam_deck_atlas.tres" id="2_2f8bs"]
 [ext_resource type="Texture2D" uid="uid://pdc0kqrtos21" path="res://assets/input_prompts/keyboard_mouse/keyboard-atlas.tres" id="2_jj163"]
 [ext_resource type="Texture2D" uid="uid://c42bbbrrdoibm" path="res://assets/input_prompts/xbox_series/xbox_atlas.tres" id="3_nk1uc"]

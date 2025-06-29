@@ -15,6 +15,7 @@ enum WashingStatus {
 @onready var area: Area3D = $Area
 @onready var raycasts: Array[RayCast3D] = [$Ray1, $Ray2, $Ray3, $Ray4]
 @onready var body: StaticBody3D = $Area/StaticBody
+@onready var interact_action: Node3D = $InteractAction
 
 @export var meshes: Array[MeshInstance3D]
 @export var status: WashingStatus = WashingStatus.Free
@@ -82,8 +83,10 @@ func setCurrentCustomer(cust: Customer) -> void:
 
 func changeStatus() -> void:
 	var player = Game.Player
-	labelName.visible = player.interact_cast.is_colliding() and player.interact_cast.get_collider() == body
+	var isColliding = player.interact_cast.is_colliding() and player.interact_cast.get_collider() == body
+	labelName.visible = isColliding
 	labelName.text = "Status: %s | Client: %s | Elapsed: %.2f/5" % [getStatus(), getCurrentCustomerName(), getElapsedTime()]
+	interact_action.visible = isColliding
 
 func getStatus() -> String:
 	if status == WashingStatus.Waiting:

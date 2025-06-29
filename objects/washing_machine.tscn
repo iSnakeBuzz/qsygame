@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://blj4vtvx2im5b"]
+[gd_scene load_steps=15 format=3 uid="uid://blj4vtvx2im5b"]
 
 [ext_resource type="Script" uid="uid://cjjmxe2earg8n" path="res://scripts/entities/washing_machine.gd" id="1_kjuok"]
+[ext_resource type="Texture2D" uid="uid://18q0u5tmwqk6" path="res://assets/input_prompts/flair/texture.png" id="2_k44nr"]
+[ext_resource type="PackedScene" uid="uid://cahrvgyoycwgo" path="res://ui/key_suggestion.tscn" id="3_k44nr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kjuok"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -13,6 +15,20 @@ sky_material = SubResource("ProceduralSkyMaterial_kjuok")
 background_mode = 2
 sky = SubResource("Sky_7jpbw")
 tonemap_mode = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecm7b"]
+atlas = ExtResource("2_k44nr")
+region = Rect2(128, 384, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k44nr"]
+load_path = "res://.godot/imported/texture.png-f4de5887cc2032f194a2e500ca1221c6.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d06m8"]
+atlas = SubResource("CompressedTexture2D_k44nr")
+region = Rect2(64, 448, 64, 64)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7jpbw"]
+viewport_path = NodePath("InteractAction/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kjuok"]
 size = Vector3(1.2, 1.558208, 1.4047523)
@@ -41,6 +57,49 @@ environment = SubResource("Environment_k44nr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
 billboard = 1
 text = "asd"
+
+[node name="InteractAction" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="SubViewport" type="SubViewport" parent="InteractAction"]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="KeySuggestion" parent="InteractAction/SubViewport" instance=ExtResource("3_k44nr")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.43
+offset_top = 0.545
+offset_right = 1.4298782
+offset_bottom = 0.54494476
+grow_horizontal = 2
+grow_vertical = 2
+ui_key = "interact"
+text_size = 20
+bg_color = Color(1, 1, 1, 0)
+padding_x = 0
+padding_y = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="InteractAction/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="InteractAction/SubViewport/CenterContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+fill_mode = 4
+texture_under = SubResource("AtlasTexture_ecm7b")
+texture_progress = SubResource("AtlasTexture_d06m8")
+
+[node name="InteractButton" type="Sprite3D" parent="InteractAction"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+no_depth_test = true
+texture = SubResource("ViewportTexture_7jpbw")
 
 [node name="Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)

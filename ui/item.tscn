@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ybib28uce1f7"]
 
-[ext_resource type="Script" uid="uid://bxxvowbxjrjhu" path="res://ui/item.gd" id="1_fdrdm"]
+[ext_resource type="Script" uid="uid://bxxvowbxjrjhu" path="res://scripts/items/item.gd" id="1_fdrdm"]
 [ext_resource type="Texture2D" uid="uid://dgbls5als6w0h" path="res://things/0001.png" id="3_6h18m"]
 [ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="3_fdrdm"]
 [ext_resource type="Texture2D" uid="uid://di240v7r3nas5" path="res://assets/ui/dollar-icon.svg" id="4_6h18m"]

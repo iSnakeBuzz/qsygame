@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://mc6b56wptbjv"]
+[gd_scene load_steps=28 format=3 uid="uid://mc6b56wptbjv"]
 
 [ext_resource type="PackedScene" uid="uid://ba7lvfvtn5ypc" path="res://scenes/gui.tscn" id="1_74lek"]
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_errlg"]
 [ext_resource type="Environment" uid="uid://b7ge0hrkb2en" path="res://assets/WORLD-ENV.tres" id="3_5jxlq"]
 [ext_resource type="Material" uid="uid://dfcy3aih22jt8" path="res://assets/materials/FloorTile.tres" id="4_lpvoh"]
 [ext_resource type="Script" uid="uid://ctfgi3tpp7ohr" path="res://scripts/entities/location.gd" id="5_j5jx5"]
+[ext_resource type="PackedScene" uid="uid://blj4vtvx2im5b" path="res://objects/washing_machine.tscn" id="5_n74k2"]
 [ext_resource type="Texture2D" uid="uid://deowfp5gpfnwk" path="res://assets/textures/RoofTexture.png" id="6_lpvoh"]
 [ext_resource type="PackedScene" uid="uid://bfc3rauomqr0g" path="res://objects/building/double_window_wall.tscn" id="7_at5dv"]
 [ext_resource type="PackedScene" uid="uid://ehigg3hlb4yx" path="res://objects/building/wall.tscn" id="7_yk7ts"]
@@ -54,6 +55,11 @@ uv1_triplanar = true
 
 [node name="GUI" parent="." instance=ExtResource("1_74lek")]
 
+[node name="Player" parent="." instance=ExtResource("1_errlg")]
+transform = Transform3D(-0.55884546, 0, -0.82927185, 0, 1, 0, 0.82927185, 0, -0.55884546, 7.4531026, 0.2, -7.1266904)
+default_reticle = "uid://coqpusufa8a6k"
+in_air_momentum = false
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_5jxlq")
 
@@ -80,6 +86,10 @@ locationName = 0
 navigation_mesh = SubResource("NavigationMesh_iyx0m")
 travel_cost = 0.6
 script = SubResource("GDScript_74lek")
+
+[node name="dev" type="Node" parent="terrain/PlaceRegion"]
+
+[node name="WashingMachine" parent="terrain/PlaceRegion/dev" instance=ExtResource("5_n74k2")]
 
 [node name="walls" type="Node" parent="terrain/PlaceRegion"]
 
@@ -244,11 +254,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.426679, 0, -6.5366607)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="terrain/PlaceRegion/desktop/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5923948, 2.2101135, 2.1206036)
 shape = SubResource("BoxShape3D_c6rvn")
-
-[node name="Player" parent="terrain/PlaceRegion/desktop" instance=ExtResource("1_errlg")]
-transform = Transform3D(-0.55884546, 0, -0.82927185, 0, 1, 0, 0.82927185, 0, -0.55884546, 7.4531026, 0.2, -7.1266904)
-default_reticle = "uid://coqpusufa8a6k"
-in_air_momentum = false
 
 [node name="Wall25" parent="terrain/PlaceRegion/desktop" instance=ExtResource("7_yk7ts")]
 transform = Transform3D(-2.1855695e-07, 0, 1, 0, 1, 0, -1, 0, -2.1855695e-07, 9.41, -2.55, -7.636955)
