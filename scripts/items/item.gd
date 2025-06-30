@@ -12,6 +12,7 @@ var display_name: String:
 var purchase_price: int:
 	set(value):
 		money_label.text = add_commas_to_int(value)
+var color: Color = Color(1, 1, 1, 1)
 
 func _ready() -> void:
 	_change_transparency(0)
@@ -38,7 +39,7 @@ func _on_mouse_entered() -> void:
 
 func _change_transparency(alpha: float) -> void:
 	var current_style = self.get_theme_stylebox("panel")
-	current_style.bg_color = Color(current_style.bg_color.r, current_style.bg_color.g, current_style.bg_color.b, alpha)
+	current_style.bg_color = Color(color.r, color.g, color.b, alpha)
 	self.add_theme_stylebox_override("panel", current_style)
 
 func add_commas_to_int(value: int) -> String:

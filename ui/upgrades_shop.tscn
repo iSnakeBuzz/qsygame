@@ -1,17 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2hrnqwoje3ar"]
+[gd_scene load_steps=10 format=3 uid="uid://nj318e8qquue"]
 
-[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://ui/build_menu.gd" id="1_6u367"]
-[ext_resource type="Script" uid="uid://h6le7a0y4nlq" path="res://scripts/ui/menu_animator_helper.gd" id="1_l8crj"]
-[ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="1_tgyje"]
-[ext_resource type="Script" uid="uid://rifn8lordb76" path="res://scripts/items/item_data.gd" id="2_cafnd"]
-[ext_resource type="Resource" uid="uid://bor6bbn1agavn" path="res://items/test.tres" id="3_l8crj"]
+[ext_resource type="Script" uid="uid://h6le7a0y4nlq" path="res://scripts/ui/menu_animator_helper.gd" id="1_m2ajy"]
+[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://ui/build_menu.gd" id="1_wnkpo"]
+[ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="4_50ila"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p54wi"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.5568628, 0.43529412, 0.99607843, 1)
+bg_color = Color(0.99607843, 0.8627451, 0.43529412, 1)
 corner_radius_top_left = 28
 corner_radius_top_right = 28
 corner_detail = 20
@@ -22,13 +20,38 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.46666667, 0.34509805, 0.9098039, 1)
+bg_color = Color(0.9098039, 0.74509805, 0.34509805, 1)
 corner_radius_bottom_right = 28
 corner_radius_bottom_left = 28
 corner_detail = 20
 shadow_color = Color(0, 0, 0, 0)
 
-[sub_resource type="Animation" id="Animation_l8crj"]
+[sub_resource type="Animation" id="Animation_s5ojs"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1280, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_n6rg8"]
 resource_name = "close"
 length = 0.3
 step = 0.0333333
@@ -39,60 +62,8 @@ tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(854, -0.15, 0, 0.15, 0, 1280, -0.050000004, -71.00001, 0, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 0, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-
-[sub_resource type="Animation" id="Animation_lbyye"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1280, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_fvmgy"]
-resource_name = "open"
-length = 0.3
-step = 0.0333333
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1280, -0.050000004, -71.00001, 0, 0, 854, -0.15, 0, 0.15, 0),
+"points": PackedFloat32Array(854, -0.050000004, 71.00001, 0, 0, 1280, -0.15, 0, 0.15, 0),
 "times": PackedFloat32Array(0, 0.3)
 }
 tracks/1/type = "bezier"
@@ -107,33 +78,59 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_evxbt"]
-_data = {
-&"RESET": SubResource("Animation_lbyye"),
-&"close": SubResource("Animation_l8crj"),
-&"open": SubResource("Animation_fvmgy")
+[sub_resource type="Animation" id="Animation_m2ajy"]
+resource_name = "open"
+length = 0.3
+step = 0.0333333
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1280, -0.050000004, -71.00001, 0, 0, 854, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.050000004, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
 }
 
-[node name="StoreMenu" type="MarginContainer"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vbuv0"]
+_data = {
+&"RESET": SubResource("Animation_s5ojs"),
+&"close": SubResource("Animation_n6rg8"),
+&"open": SubResource("Animation_m2ajy")
+}
+
+[node name="UpgradesShop" type="MarginContainer"]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 426.0
+offset_right = 426.00073
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
-script = ExtResource("1_l8crj")
+script = ExtResource("1_m2ajy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 2
-script = ExtResource("1_6u367")
-items = Array[ExtResource("2_cafnd")]([ExtResource("3_l8crj")])
-hover_color = Color(0.36862746, 0.25490198, 0.78431374, 1)
+script = ExtResource("1_wnkpo")
+hover_color = Color(0.78431374, 0.6156863, 0.25490198, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(370, 0)
@@ -154,10 +151,10 @@ theme_override_constants/margin_bottom = 16
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Header/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.24313726, 0.16470589, 0.5254902, 1)
-theme_override_fonts/font = ExtResource("1_tgyje")
+theme_override_colors/font_color = Color(0.5254902, 0.38431373, 0.16470589, 1)
+theme_override_fonts/font = ExtResource("4_50ila")
 theme_override_font_sizes/font_size = 32
-text = "Store"
+text = "Upgrades"
 
 [node name="Content" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -170,5 +167,5 @@ theme_override_constants/separation = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_evxbt")
+&"": SubResource("AnimationLibrary_vbuv0")
 }

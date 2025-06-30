@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dsnmgf7o1te6g"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t65qh"]
-load_path = "res://.godot/imported/steam-deck_sheet_double.png-1ac544ad7573a1e7199b637ff04948f9.ctex"
-
-[resource]
-atlas = SubResource("CompressedTexture2D_t65qh")

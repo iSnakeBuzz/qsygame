@@ -68,13 +68,15 @@ func calculate_mono_spacing(_size: int) -> int:
 func _ready() -> void:
 	atlas_naming.set(DeviceType.KEYBOARD, KeyManager.new("res://assets/input_prompts/keyboard_mouse/texture.xml"))
 	atlas_naming.set(DeviceType.XBOX, KeyManager.new("res://assets/input_prompts/xbox_series/texture.xml"))
-	atlas_naming.set(DeviceType.STEAM_DECK, KeyManager.new("res://assets/input_prompts/steam_deck/texture.xml"))
+	# atlas_naming.set(DeviceType.STEAM_DECK, KeyManager.new("res://assets/input_prompts/steam_deck/texture.xml"))
 
 	# Listening to device change
 	Game.ON_INPUT_DEVICE_CHANGE.connect(_on_input_device_change)
 
 	_update_text_label()
 	_update_box()
+	_update_hbox_container()
+	_update_margin_box()
 
 	# If true it handles unhandled input
 	set_process_unhandled_input(debug_key)

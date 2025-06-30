@@ -1,11 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://mc6b56wptbjv"]
+[gd_scene load_steps=27 format=3 uid="uid://mc6b56wptbjv"]
 
 [ext_resource type="PackedScene" uid="uid://ba7lvfvtn5ypc" path="res://scenes/gui.tscn" id="1_74lek"]
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_errlg"]
 [ext_resource type="Environment" uid="uid://b7ge0hrkb2en" path="res://assets/WORLD-ENV.tres" id="3_5jxlq"]
 [ext_resource type="Material" uid="uid://dfcy3aih22jt8" path="res://assets/materials/FloorTile.tres" id="4_lpvoh"]
 [ext_resource type="Script" uid="uid://ctfgi3tpp7ohr" path="res://scripts/entities/location.gd" id="5_j5jx5"]
-[ext_resource type="PackedScene" uid="uid://blj4vtvx2im5b" path="res://objects/washing_machine.tscn" id="5_n74k2"]
 [ext_resource type="Texture2D" uid="uid://deowfp5gpfnwk" path="res://assets/textures/RoofTexture.png" id="6_lpvoh"]
 [ext_resource type="PackedScene" uid="uid://bfc3rauomqr0g" path="res://objects/building/double_window_wall.tscn" id="7_at5dv"]
 [ext_resource type="PackedScene" uid="uid://ehigg3hlb4yx" path="res://objects/building/wall.tscn" id="7_yk7ts"]
@@ -53,7 +52,8 @@ uv1_triplanar = true
 
 [node name="test" type="Node3D"]
 
-[node name="GUI" parent="." instance=ExtResource("1_74lek")]
+[node name="GUI" parent="." node_paths=PackedStringArray("inventories") instance=ExtResource("1_74lek")]
+inventories = {}
 
 [node name="Player" parent="." instance=ExtResource("1_errlg")]
 transform = Transform3D(-0.55884546, 0, -0.82927185, 0, 1, 0, 0.82927185, 0, -0.55884546, 7.4531026, 0.2, -7.1266904)
@@ -88,8 +88,6 @@ travel_cost = 0.6
 script = SubResource("GDScript_74lek")
 
 [node name="dev" type="Node" parent="terrain/PlaceRegion"]
-
-[node name="WashingMachine" parent="terrain/PlaceRegion/dev" instance=ExtResource("5_n74k2")]
 
 [node name="walls" type="Node" parent="terrain/PlaceRegion"]
 

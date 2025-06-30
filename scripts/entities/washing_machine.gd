@@ -11,7 +11,7 @@ enum WashingStatus {
 @onready var allowed_placement: Material = preload("res://materials/allowed_placement.tres")
 @onready var unallowed_placement: Material = preload("res://materials/unallowed_placement.tres")
 
-@onready var labelName: Label3D = $LabelName
+@onready var labelName: Label3D = $Dev/LabelName
 @onready var area: Area3D = $Area
 @onready var raycasts: Array[RayCast3D] = [$Ray1, $Ray2, $Ray3, $Ray4]
 @onready var body: StaticBody3D = $Area/StaticBody
@@ -104,3 +104,11 @@ func getCurrentCustomerName() -> String:
 
 func getElapsedTime() -> float:
 	return (Time.get_ticks_msec() - startedWashingAt) / 1000.0
+
+
+func _on_move_interaction_handler_interact_call() -> void:
+	print("[%s] Handling logic to move the Washing Machine" % [self.name])
+
+func _on_upgrades_interaction_handler_interact_call() -> void:
+	print("[%s] Opening Upgrades Menu" % self.name)
+	Game.openMenu(Game.MenuType.Upgrades, self)

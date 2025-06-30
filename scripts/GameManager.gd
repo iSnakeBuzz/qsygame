@@ -5,10 +5,16 @@ enum TeleportLocation {
 	Door
 }
 
+enum MenuType {
+	Main,
+	Upgrades,
+	Store,
+}
+
 signal ON_MENU_CLOSE
+signal ON_MENU_OPEN(menu_type: MenuType, data: Node3D)
 signal ON_INPUT_DEVICE_CHANGE(device_id: int)
 
-var _mouseVisible: bool = true
 var _locations: Dictionary
 
 var _machines: Array[WashingMachine]
@@ -44,6 +50,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("debug"):
 		_debug = !_debug
+	if Input.is_action_just_pressed("store"):
+		if on_menu():
+			closeMenu()
+		else:
+			openMenu(MenuType.Store)
 
 func purchaseEntityObject(entity: Entity, price: int) -> bool:
 	if Money < price:
@@ -85,19 +96,29 @@ func addLocation(location: TeleportLocation, position: Vector3) -> void:
 func getLocation(location: TeleportLocation) -> Vector3:
 	return _locations.get(str(location).to_lower())
 
+# Add money to the player
 func addCash(money: int) -> void:
 	self.Money += money
 
+# Set mouse mode to visible or captured
 func updateMouse(visible: bool) -> void:
 	if visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	_mouseVisible = visible
 
+# Emit signal to close all menus
 func closeMenu() -> void:
-	ON_MENU_CLOSE.emit()
 	updateMouse(false)
+	ON_MENU_CLOSE.emit()
+
+# Emit signal to open a menu with optional data
+func openMenu(menu_type: MenuType, data: Node3D = null) -> void:
+	ON_MENU_OPEN.emit(menu_type, data)
+
+# Check if the user has any menu open
+func on_menu() -> bool:
+	return Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
 
 func _hook_discord() -> void:
 	# Application ID

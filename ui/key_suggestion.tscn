@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cahrvgyoycwgo"]
+[gd_scene load_steps=8 format=3 uid="uid://cahrvgyoycwgo"]
 
 [ext_resource type="Script" uid="uid://bnv04jc7iek55" path="res://scripts/keys/key_suggestion.gd" id="1_8al1k"]
-[ext_resource type="Texture2D" uid="uid://dsnmgf7o1te6g" path="res://assets/input_prompts/steam_deck/steam_deck_atlas.tres" id="2_2f8bs"]
 [ext_resource type="Texture2D" uid="uid://pdc0kqrtos21" path="res://assets/input_prompts/keyboard_mouse/keyboard-atlas.tres" id="2_jj163"]
 [ext_resource type="Texture2D" uid="uid://c42bbbrrdoibm" path="res://assets/input_prompts/xbox_series/xbox_atlas.tres" id="3_nk1uc"]
 [ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="5_2f8bs"]
@@ -34,8 +33,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ynd5l")
 script = ExtResource("1_8al1k")
 texture_atlas = Dictionary[int, AtlasTexture]({
 0: ExtResource("2_jj163"),
-1: ExtResource("3_nk1uc"),
-2: ExtResource("2_2f8bs")
+1: ExtResource("3_nk1uc")
 })
 
 [node name="CenterContainer" type="MarginContainer" parent="."]

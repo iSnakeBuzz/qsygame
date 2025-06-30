@@ -1,20 +1,21 @@
-[gd_scene load_steps=15 format=3 uid="uid://blj4vtvx2im5b"]
+[gd_scene load_steps=20 format=3 uid="uid://blj4vtvx2im5b"]
 
 [ext_resource type="Script" uid="uid://cjjmxe2earg8n" path="res://scripts/entities/washing_machine.gd" id="1_kjuok"]
+[ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="2_d06m8"]
 [ext_resource type="Texture2D" uid="uid://18q0u5tmwqk6" path="res://assets/input_prompts/flair/texture.png" id="2_k44nr"]
 [ext_resource type="PackedScene" uid="uid://cahrvgyoycwgo" path="res://ui/key_suggestion.tscn" id="3_k44nr"]
+[ext_resource type="Script" uid="uid://ct4usocmbxhjk" path="res://scripts/interactions/interaction.gd" id="5_ecm7b"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kjuok"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_7jpbw"]
-sky_material = SubResource("ProceduralSkyMaterial_kjuok")
-
-[sub_resource type="Environment" id="Environment_k44nr"]
-background_mode = 2
-sky = SubResource("Sky_7jpbw")
-tonemap_mode = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k44nr"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ecm7b"]
 atlas = ExtResource("2_k44nr")
@@ -26,6 +27,30 @@ load_path = "res://.godot/imported/texture.png-f4de5887cc2032f194a2e500ca1221c6.
 [sub_resource type="AtlasTexture" id="AtlasTexture_d06m8"]
 atlas = SubResource("CompressedTexture2D_k44nr")
 region = Rect2(64, 448, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d06m8"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ecm7b"]
+load_path = "res://.godot/imported/texture.png-610e7a763b3718ebd060a2b169667867.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hps10"]
+atlas = SubResource("CompressedTexture2D_ecm7b")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7anxb"]
+load_path = "res://.godot/imported/texture.png-341cdded643edb23e568f30f5be3f401.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivb2m"]
+atlas = SubResource("CompressedTexture2D_7anxb")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7jpbw"]
 viewport_path = NodePath("InteractAction/SubViewport")
@@ -44,62 +69,125 @@ size = Vector3(0.35, 0.71, 0.14)
 
 [node name="WashingMachine" type="Node3D" node_paths=PackedStringArray("meshes")]
 script = ExtResource("1_kjuok")
-meshes = [NodePath("Area/MeshInstance3D"), NodePath("Area/MeshInstance3D/MeshInstance3D2")]
+meshes = [NodePath("Area/MeshInstance3D/MeshInstance3D2"), NodePath("Area/MeshInstance3D")]
+
+[node name="Dev" type="Node3D" parent="."]
+
+[node name="LabelName" type="Label3D" parent="Dev"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+billboard = 1
+text = "asd"
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 height = 1.95
 vertices = PackedVector3Array(-0.6072017, 0, 0.6713153, -0.606055, 0, -0.7449922, 0.60623384, 0, -0.7430801, 0.6045221, 0, 0.6716417)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_k44nr")
-
-[node name="LabelName" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
-billboard = 1
-text = "asd"
 
 [node name="InteractAction" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="SubViewport" type="SubViewport" parent="InteractAction"]
 transparent_bg = true
-size = Vector2i(64, 64)
+size = Vector2i(160, 128)
 
-[node name="KeySuggestion" parent="InteractAction/SubViewport" instance=ExtResource("3_k44nr")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.43
-offset_top = 0.545
-offset_right = 1.4298782
-offset_bottom = 0.54494476
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HBoxContainer" type="VBoxContainer" parent="InteractAction/SubViewport"]
+offset_right = 311.0
+offset_bottom = 130.0
+theme_override_constants/separation = -12
+
+[node name="Upgrades" type="HBoxContainer" parent="InteractAction/SubViewport/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="InteractAction/SubViewport/HBoxContainer/Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="KeySuggestion" parent="InteractAction/SubViewport/HBoxContainer/Upgrades/CenterContainer" instance=ExtResource("3_k44nr")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k44nr")
 ui_key = "interact"
 text_size = 20
 bg_color = Color(1, 1, 1, 0)
+text_color = Color(1, 1, 1, 1)
 padding_x = 0
 padding_y = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="InteractAction/SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CenterContainer" type="CenterContainer" parent="InteractAction/SubViewport/HBoxContainer/Upgrades/CenterContainer"]
+layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="InteractAction/SubViewport/CenterContainer"]
+[node name="upgrade_pr" type="TextureProgressBar" parent="InteractAction/SubViewport/HBoxContainer/Upgrades/CenterContainer/CenterContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 fill_mode = 4
 texture_under = SubResource("AtlasTexture_ecm7b")
 texture_progress = SubResource("AtlasTexture_d06m8")
 
+[node name="Label" type="Label" parent="InteractAction/SubViewport/HBoxContainer/Upgrades"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_d06m8")
+text = "Upgrades"
+
+[node name="Move" type="HBoxContainer" parent="InteractAction/SubViewport/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="InteractAction/SubViewport/HBoxContainer/Move"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="KeySuggestion" parent="InteractAction/SubViewport/HBoxContainer/Move/CenterContainer" instance=ExtResource("3_k44nr")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d06m8")
+ui_key = "move"
+text_size = 20
+bg_color = Color(1, 1, 1, 0)
+text_color = Color(1, 1, 1, 1)
+padding_x = 0
+padding_y = 0
+texture_atlas = Dictionary[int, AtlasTexture]({
+0: SubResource("AtlasTexture_hps10"),
+1: SubResource("AtlasTexture_ivb2m")
+})
+
+[node name="CenterContainer" type="CenterContainer" parent="InteractAction/SubViewport/HBoxContainer/Move/CenterContainer"]
+layout_mode = 2
+
+[node name="move_pr" type="TextureProgressBar" parent="InteractAction/SubViewport/HBoxContainer/Move/CenterContainer/CenterContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+fill_mode = 4
+texture_under = SubResource("AtlasTexture_ecm7b")
+texture_progress = SubResource("AtlasTexture_d06m8")
+
+[node name="Label" type="Label" parent="InteractAction/SubViewport/HBoxContainer/Move"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_d06m8")
+text = "Move"
+
 [node name="InteractButton" type="Sprite3D" parent="InteractAction"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 billboard = 1
 no_depth_test = true
+fixed_size = true
 texture = SubResource("ViewportTexture_7jpbw")
+
+[node name="UpgradesInteractionHandler" type="Node3D" parent="InteractAction" node_paths=PackedStringArray("progressbar", "interacting_with")]
+script = ExtResource("5_ecm7b")
+interact_key = &"interact"
+progressbar = NodePath("../SubViewport/HBoxContainer/Upgrades/CenterContainer/CenterContainer/upgrade_pr")
+press_duration = 0.6999999999970896
+interacting_with = NodePath("../../Area/StaticBody")
+
+[node name="MoveInteractionHandler" type="Node3D" parent="InteractAction" node_paths=PackedStringArray("progressbar", "interacting_with")]
+script = ExtResource("5_ecm7b")
+interact_key = &"move"
+progressbar = NodePath("../SubViewport/HBoxContainer/Move/CenterContainer/CenterContainer/move_pr")
+press_duration = 0.6999999999970896
+interacting_with = NodePath("../../Area/StaticBody")
 
 [node name="Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
@@ -145,3 +233,6 @@ collision_mask = 3
 
 [node name="NPCLoc" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.269)
+
+[connection signal="interact_call" from="InteractAction/UpgradesInteractionHandler" to="." method="_on_upgrades_interaction_handler_interact_call"]
+[connection signal="interact_call" from="InteractAction/MoveInteractionHandler" to="." method="_on_move_interaction_handler_interact_call"]

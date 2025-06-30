@@ -5,6 +5,7 @@ extends HBoxContainer
 @onready var building_grid: VBoxContainer = $VBoxContainer/Content/VBoxContainer
 
 @export var items: Array[ItemData]
+@export var hover_color: Color = Color(1, 1, 1, 1)
 
 func _ready() -> void:
 	print("Items: %s %s" % [items, items.size()])
@@ -18,3 +19,4 @@ func _ready() -> void:
 		build_item.display_name = item.display_name
 		build_item.purchase_price = item.purchase_price
 		build_item.item_image.texture = item.image
+		build_item.color = hover_color
