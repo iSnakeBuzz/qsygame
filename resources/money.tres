@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bqhtmytysgg43"]
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://bqhtmytysgg43"]
 
 [ext_resource type="Script" uid="uid://dcrvc5c3d7nfg" path="res://scripts/washing/upgrade.gd" id="1_ishq6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ishq6"]
+load_path = "res://.godot/imported/icons_atlas.png-b41c3694baab9e82d29e1eac11a6e2a2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptvxt"]
+atlas = SubResource("CompressedTexture2D_ishq6")
+region = Rect2(0, 0, 128, 128)
 
 [resource]
 script = ExtResource("1_ishq6")
 display_name = "Money"
 description = "Increment the amount of money gained by client."
+image = SubResource("AtlasTexture_ptvxt")
 type = 1
 price = 50
 calculate = 1

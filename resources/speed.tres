@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://uacjvlpunxkj"]
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://uacjvlpunxkj"]
 
 [ext_resource type="Script" uid="uid://dcrvc5c3d7nfg" path="res://scripts/washing/upgrade.gd" id="1_schw6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_schw6"]
+load_path = "res://.godot/imported/icons_atlas.png-b41c3694baab9e82d29e1eac11a6e2a2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sfcm"]
+atlas = SubResource("CompressedTexture2D_schw6")
+region = Rect2(0, 256, 128, 128)
 
 [resource]
 script = ExtResource("1_schw6")
 display_name = "Speed"
 description = "Increment the speed of the washing machine."
+image = SubResource("AtlasTexture_2sfcm")
 value = 15.0
 price_multiplier = 0.15000000000873115
 multiplier_per_level = 0.014999999999417923

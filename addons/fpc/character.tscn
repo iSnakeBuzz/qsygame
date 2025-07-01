@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://cc1m2a1obsyn4"]
+[gd_scene load_steps=25 format=3 uid="uid://cc1m2a1obsyn4"]
 
 [ext_resource type="Script" uid="uid://dyqni2873nd3r" path="res://addons/fpc/character.gd" id="1_0t4e8"]
+[ext_resource type="Shader" uid="uid://dudwrst3h1mfw" path="res://shaders/raymarching.gdshader" id="2_bx7cj"]
 [ext_resource type="Script" uid="uid://cuyluvyfanagw" path="res://addons/fpc/EditorModule.gd" id="3_v3ckk"]
 [ext_resource type="Script" uid="uid://b1pix7q5470pc" path="res://addons/fpc/debug.gd" id="3_x1wcc"]
 
@@ -153,6 +154,10 @@ _data = {
 [sub_resource type="QuadMesh" id="QuadMesh_bupmj"]
 flip_faces = true
 size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bx7cj"]
+render_priority = 0
+shader = ExtResource("2_bx7cj")
 
 [sub_resource type="Animation" id="Animation_gh776"]
 resource_name = "RESET"
@@ -420,6 +425,7 @@ fov = 70.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Camera"]
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_bupmj")
+surface_material_override/0 = SubResource("ShaderMaterial_bx7cj")
 
 [node name="HeadbobAnimation" type="AnimationPlayer" parent="Head"]
 libraries = {

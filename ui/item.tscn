@@ -103,14 +103,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_6h18m")
 
 [node name="ImageMargin" type="MarginContainer" parent="PanelContainer/HBoxContainer/ImageCN"]
 layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
 
 [node name="Image" type="TextureRect" parent="PanelContainer/HBoxContainer/ImageCN/ImageMargin"]
 layout_mode = 2
 texture = ExtResource("3_6h18m")
+expand_mode = 1
 
 [node name="Amount" type="PanelContainer" parent="PanelContainer/HBoxContainer/ImageCN"]
 visible = false
