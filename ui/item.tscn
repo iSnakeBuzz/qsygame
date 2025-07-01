@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://ybib28uce1f7"]
+[gd_scene load_steps=13 format=3 uid="uid://ybib28uce1f7"]
 
 [ext_resource type="Script" uid="uid://bxxvowbxjrjhu" path="res://scripts/items/item.gd" id="1_fdrdm"]
 [ext_resource type="Texture2D" uid="uid://dgbls5als6w0h" path="res://things/0001.png" id="3_6h18m"]
 [ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="3_fdrdm"]
 [ext_resource type="Texture2D" uid="uid://di240v7r3nas5" path="res://assets/ui/dollar-icon.svg" id="4_6h18m"]
+[ext_resource type="FontFile" uid="uid://xxs5cuxf8u74" path="res://fonts/montreal/Montreal-Regular.ttf" id="4_qbdqg"]
 [ext_resource type="FontFile" uid="uid://dgeka46pm1b8i" path="res://fonts/Cousine/Cousine-Bold.ttf" id="5_qbdqg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdrdm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbdqg"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
@@ -30,12 +31,24 @@ corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f37ge"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0.8, 0, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hai2l"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.4392157, 0.92941177, 0.38039216, 1)
+bg_color = Color(0.43617004, 0.93, 0.38130003, 1)
 corner_radius_top_left = 56
 corner_radius_top_right = 56
 corner_radius_bottom_right = 56
@@ -46,6 +59,18 @@ corner_detail = 20
 base_font = ExtResource("5_qbdqg")
 spacing_bottom = -4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uq62f"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.31423002, 0.67, 0.27470002, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 20
+
 [node name="Item" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,7 +79,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fdrdm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbdqg")
 script = ExtResource("1_fdrdm")
 
 [node name="PanelContainer" type="MarginContainer" parent="."]
@@ -87,6 +112,29 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 texture = ExtResource("3_6h18m")
 
+[node name="Amount" type="PanelContainer" parent="PanelContainer/HBoxContainer/ImageCN"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_f37ge")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/ImageCN/Amount"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/ImageCN/Amount/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0.4, 0, 1)
+theme_override_fonts/font = ExtResource("3_fdrdm")
+theme_override_font_sizes/font_size = 12
+text = "x1"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -97,6 +145,17 @@ mouse_filter = 1
 theme_override_fonts/font = ExtResource("3_fdrdm")
 theme_override_font_sizes/font_size = 18
 text = "Machine asd asd asd asd"
+
+[node name="Description" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 0.8627451)
+theme_override_fonts/font = ExtResource("4_qbdqg")
+theme_override_font_sizes/font_size = 13
+text = "Machine asd asd asd asd"
+autowrap_mode = 2
 
 [node name="MoneyContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -130,6 +189,34 @@ size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.03529412, 0.40392157, 0.078431375, 1)
 theme_override_fonts/font = SubResource("FontVariation_f37ge")
 text = "999,999,999"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="MaxedContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_uq62f")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/MaxedContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/MaxedContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MaxedLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/MaxedContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.03869999, 0.43, 0.084351696, 1)
+theme_override_fonts/font = SubResource("FontVariation_f37ge")
+text = "MAXED"
 horizontal_alignment = 2
 vertical_alignment = 2
 

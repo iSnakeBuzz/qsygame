@@ -128,3 +128,8 @@ func _on_upgrades_interaction_handler_interact_call() -> void:
 	if editing: return
 	print("[%s] Opening Upgrades Menu" % self.name)
 	Game.openMenu(Game.MenuType.Upgrades, self)
+
+func calculateReward() -> int:
+	if not upgrades.has(Upgrade.Type.Money): return 5
+	var money: Upgrade = upgrades.get(Upgrade.Type.Money)
+	return int(money.calculateValue())

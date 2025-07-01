@@ -19,6 +19,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		Game.updateMouse(self.visible)
 		return
 	self.visible = false
+	on_data_set.emit(null)
 	Game.updateMouse(self.visible)
 
 # exported functions
@@ -32,7 +33,6 @@ func closeMenu() -> void:
 	if not self.visible: return
 	print("[MenuAnimatorHelper] Closing menu %s" % self.name)
 	animation_player.play("close")
-	on_data_set.emit(null)
 
 func is_open() -> bool:
 	return self.visible

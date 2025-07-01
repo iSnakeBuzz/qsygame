@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://nj318e8qquue"]
 
 [ext_resource type="Script" uid="uid://h6le7a0y4nlq" path="res://scripts/ui/menu_animator_helper.gd" id="1_m2ajy"]
-[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://ui/build_menu.gd" id="1_wnkpo"]
+[ext_resource type="Script" uid="uid://2ddj1rl1yiuo" path="res://scripts/ui/upgrades_menu.gd" id="2_hsyuo"]
 [ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="4_50ila"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p54wi"]
@@ -96,7 +96,7 @@ script = ExtResource("1_m2ajy")
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 2
-script = ExtResource("1_wnkpo")
+script = ExtResource("2_hsyuo")
 hover_color = Color(0.78431374, 0.6156863, 0.25490198, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
@@ -137,3 +137,5 @@ deterministic = true
 libraries = {
 &"": SubResource("AnimationLibrary_vbuv0")
 }
+
+[connection signal="on_data_set" from="." to="HBoxContainer" method="_on_upgrades_shop_on_data_set"]

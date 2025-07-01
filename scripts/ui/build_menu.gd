@@ -15,8 +15,23 @@ func _ready() -> void:
 
 		await get_tree().process_frame
 
-		build_item.resource = item.prefab
 		build_item.display_name = item.display_name
 		build_item.purchase_price = item.purchase_price
 		build_item.item_image.texture = item.image
 		build_item.color = hover_color
+		build_item.metadata = {
+			"resource": item.prefab,
+			"purchase_price": item.purchase_price,
+		}
+		build_item.on_clicked.connect(on_item_purchase)
+
+func on_item_purchase(metadata: Dictionary) -> void:
+	var resource = metadata["resource"]
+	var purchase_price = metadata["purchase_price"]
+
+	PlacementManager.WashingMachineObject = resource
+	PlacementManager._create()
+	PlacementManager.placing = true
+	PlacementManager.selected_price = purchase_price
+
+	Game.closeMenu()

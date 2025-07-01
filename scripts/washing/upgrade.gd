@@ -17,6 +17,7 @@ enum Calculate {
 
 @export var display_name: String
 @export var description: String
+@export var image: Texture2D
 
 @export_group("Upgrade Settings")
 @export var type: Type
@@ -42,10 +43,11 @@ func calculateValue() -> float:
 		return value - (value * (multiplier_per_level * level))
 	return value + (value * (multiplier_per_level * level))
 
-func upgrade() -> void:
-	if maxedOut(): return
+func upgrade() -> bool:
+	if maxedOut(): return false
 	level += 1
 	Game.removeCash(calculatePrice())
+	return true
 
 func maxedOut() -> bool:
 	return level == max_level

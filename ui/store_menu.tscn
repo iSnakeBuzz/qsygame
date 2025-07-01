@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://c2hrnqwoje3ar"]
 
-[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://ui/build_menu.gd" id="1_6u367"]
+[ext_resource type="Script" uid="uid://buox0iewea1xy" path="res://scripts/ui/build_menu.gd" id="1_6u367"]
 [ext_resource type="Script" uid="uid://h6le7a0y4nlq" path="res://scripts/ui/menu_animator_helper.gd" id="1_l8crj"]
 [ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="1_tgyje"]
 [ext_resource type="Script" uid="uid://rifn8lordb76" path="res://scripts/items/item_data.gd" id="2_cafnd"]

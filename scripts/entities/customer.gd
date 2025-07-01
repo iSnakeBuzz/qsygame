@@ -124,7 +124,7 @@ func _targetReached() -> void:
 func _handleFinish() -> void:
 	self.setCooldown()
 	Game.teleportTo(self, Game.TeleportLocation.Pool)
-	Game.addCash(100)
+	Game.addCash(currentMachine.calculateReward())
 
 	navigation.target_position = self.global_position
 
