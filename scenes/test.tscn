@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://mc6b56wptbjv"]
+[gd_scene load_steps=41 format=3 uid="uid://mc6b56wptbjv"]
 
 [ext_resource type="PackedScene" uid="uid://ba7lvfvtn5ypc" path="res://scenes/gui.tscn" id="1_74lek"]
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_errlg"]
@@ -19,8 +19,21 @@
 [ext_resource type="PackedScene" uid="uid://eoe4k16dmbgm" path="res://assets/models/living_room_props/Desk.glb" id="15_daiq8"]
 [ext_resource type="LightmapGIData" uid="uid://cxq66eglis6ae" path="res://bakes/test.lmbake" id="16_7yos8"]
 [ext_resource type="PackedScene" uid="uid://cxj1yvcym14vy" path="res://assets/models/living_room_props/SunflowersVase.glb" id="17_n74k2"]
+[ext_resource type="PackedScene" uid="uid://dp6aiyjodn47u" path="res://assets/models/living_room_props/Phone.glb" id="18_gv2t6"]
+[ext_resource type="PackedScene" uid="uid://057vp55ws412" path="res://assets/models/living_room_props/PC.glb" id="19_1xwo4"]
 [ext_resource type="PackedScene" uid="uid://bv8gro0qffcwb" path="res://assets/models/living_room_props/OfficeChair.glb" id="19_c6rvn"]
 [ext_resource type="PackedScene" uid="uid://deqpuwwr3amv" path="res://assets/models/furniture/SingleHangingCabinetLeft.glb" id="20_c6rvn"]
+[ext_resource type="PackedScene" uid="uid://byn3enb1ga3y7" path="res://assets/models/living_room_props/Mug.glb" id="24_5civd"]
+[ext_resource type="PackedScene" uid="uid://wg4eiw0fh0jh" path="res://assets/models/living_room_props/Mouse.glb" id="25_mi64w"]
+[ext_resource type="PackedScene" uid="uid://c07nm0e8rx75b" path="res://assets/models/living_room_props/MonsteraPlant.glb" id="26_ds53i"]
+[ext_resource type="PackedScene" uid="uid://dfkkkqno3cqyf" path="res://assets/models/living_room_props/Monitor.glb" id="27_p8c7m"]
+[ext_resource type="PackedScene" uid="uid://3h1ddypd23bk" path="res://assets/models/living_room_props/Keyboard.glb" id="28_3ss0b"]
+[ext_resource type="PackedScene" uid="uid://7ve87hkkwt0i" path="res://assets/models/living_room_props/Frame1.glb" id="29_mftsw"]
+[ext_resource type="PackedScene" uid="uid://ewyq8rbwj3pm" path="res://assets/models/living_room_props/AirConditioner.glb" id="30_q6ayx"]
+[ext_resource type="PackedScene" uid="uid://03lyth768lwp" path="res://assets/models/living_room_props/SetOfBooks2.glb" id="31_iq7xp"]
+[ext_resource type="PackedScene" uid="uid://3kiu26medkr4" path="res://assets/models/living_room_props/SetOfBooks.glb" id="32_s6cx0"]
+[ext_resource type="PackedScene" uid="uid://b5weckei135wr" path="res://assets/models/living_room_props/Speaker.glb" id="33_emonu"]
+[ext_resource type="PackedScene" uid="uid://cfv6hrwkf0po8" path="res://assets/models/living_room_props/TableTopFrame.glb" id="34_pdwa4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyx0m"]
 normal_enabled = true
@@ -291,7 +304,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.090161, 0.934492, -8.06386)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.918336, 0.934492, -8.06386)
 
 [node name="SunflowersVase2" parent="terrain/PlaceRegion/desktop" instance=ExtResource("17_n74k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.820347, 0.8001716, 4.0128727)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.608992, 1.7448337, -8.397194)
+
+[node name="Phone2" parent="terrain/PlaceRegion/desktop" instance=ExtResource("18_gv2t6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.756633, 1.050619, -5.5341887)
+
+[node name="PC2" parent="terrain/PlaceRegion/desktop" instance=ExtResource("19_1xwo4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.767834, 0.25536406, -5.6057367)
 
 [node name="Floor" type="CSGBox3D" parent="terrain/PlaceRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -322,3 +341,36 @@ light_data = ExtResource("16_7yos8")
 
 [node name="OfficeChair" parent="." instance=ExtResource("19_c6rvn")]
 transform = Transform3D(0.9431299, 0, -0.33242452, 0, 1, 0, 0.33242452, 0, 0.9431299, 8.573516, 0.2546707, -6.4879484)
+
+[node name="Mug2" parent="." instance=ExtResource("24_5civd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6750507, 1.0506542, -5.828743)
+
+[node name="Mouse2" parent="." instance=ExtResource("25_mi64w")]
+transform = Transform3D(-0.96994424, 0, 0.2433272, 0, 1, 0, -0.2433272, 0, -0.96994424, 8.018823, 1.0506812, -5.9011135)
+
+[node name="MonsteraPlant" parent="." instance=ExtResource("26_ds53i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6400456, 0.24999988, -7.909286)
+
+[node name="Monitor2" parent="." instance=ExtResource("27_p8c7m")]
+transform = Transform3D(-0.98046744, 0, -0.19668195, 0, 1, 0, 0.19668195, 0, -0.98046744, 8.718071, 1.0506191, -5.4630733)
+
+[node name="Keyboard2" parent="." instance=ExtResource("28_3ss0b")]
+transform = Transform3D(-0.997976, 0, 0.063591845, 0, 1, 0, -0.063591845, 0, -0.997976, 8.336902, 1.0506191, -5.8350177)
+
+[node name="Frame1" parent="." instance=ExtResource("29_mftsw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.151571, 1.8111432, -8.216573)
+
+[node name="AirConditioner" parent="." instance=ExtResource("30_q6ayx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.463416, 3.5731874, -8.60234)
+
+[node name="SetOfBooks2" parent="." instance=ExtResource("31_iq7xp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.94212, 1.7515482, -8.390081)
+
+[node name="SetOfBooks" parent="." instance=ExtResource("32_s6cx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.905261, 1.1462237, -8.145467)
+
+[node name="Speaker2" parent="." instance=ExtResource("33_emonu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.338682, 1.9500601, -8.127655)
+
+[node name="TableTopFrame" parent="." instance=ExtResource("34_pdwa4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.65614, 1.740188, -8.352677)
