@@ -100,6 +100,10 @@ func getLocation(location: TeleportLocation) -> Vector3:
 func addCash(money: int) -> void:
 	self.Money += money
 
+# Remove money from the player
+func removeCash(money: int) -> void:
+	self.Money -= money
+
 # Set mouse mode to visible or captured
 func updateMouse(visible: bool) -> void:
 	if visible:

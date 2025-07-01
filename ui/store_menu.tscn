@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://h6le7a0y4nlq" path="res://scripts/ui/menu_animator_helper.gd" id="1_l8crj"]
 [ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="1_tgyje"]
 [ext_resource type="Script" uid="uid://rifn8lordb76" path="res://scripts/items/item_data.gd" id="2_cafnd"]
-[ext_resource type="Resource" uid="uid://bor6bbn1agavn" path="res://items/test.tres" id="3_l8crj"]
+[ext_resource type="Resource" uid="uid://bor6bbn1agavn" path="res://resources/test.tres" id="3_l8crj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p54wi"]
 content_margin_left = 0.0
@@ -35,23 +35,12 @@ step = 0.0333333
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
+tracks/0/path = NodePath(".:theme_override_constants/margin_right")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(854, -0.15, 0, 0.15, 0, 1280, -0.050000004, -71.00001, 0, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 0, -0.050000004, 0, 0, 0),
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(28, 0, 0, 0.050000004, -71.00001, -398, -0.15, 0, 0.15, 0),
 "times": PackedFloat32Array(0, 0.3)
 }
 
@@ -60,23 +49,12 @@ length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
+tracks/0/path = NodePath(".:theme_override_constants/margin_right")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1280, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"points": PackedFloat32Array(-398, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -87,23 +65,12 @@ step = 0.0333333
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
+tracks/0/path = NodePath(".:theme_override_constants/margin_right")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1280, -0.050000004, -71.00001, 0, 0, 854, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.050000004, 0, 0, 0, 0, -0.15, 0, 0.15, 0),
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-398, -0.15, 0, 0.15, 0, 28, -0.050000004, -71.00001, 0, 0),
 "times": PackedFloat32Array(0, 0.3)
 }
 
@@ -115,16 +82,16 @@ _data = {
 }
 
 [node name="StoreMenu" type="MarginContainer"]
+custom_minimum_size = Vector2(426, 0)
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 426.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 28
-theme_override_constants/margin_right = 28
+theme_override_constants/margin_right = -398
 theme_override_constants/margin_bottom = 28
 script = ExtResource("1_l8crj")
 
@@ -169,6 +136,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
 libraries = {
 &"": SubResource("AnimationLibrary_evxbt")
 }

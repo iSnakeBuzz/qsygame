@@ -18,9 +18,11 @@ enum WashingStatus {
 @onready var interact_action: Node3D = $InteractAction
 
 @export var meshes: Array[MeshInstance3D]
-@export var status: WashingStatus = WashingStatus.Free
+@export var upgrades: Dictionary[Upgrade.Type, Upgrade]
 
-var washingTime: int = 5 # In seconds
+var status: WashingStatus = WashingStatus.Setup
+
+var editing: bool = false
 var startedWashingAt: int = 0
 var currentCustomer: Customer = null
 
@@ -37,7 +39,7 @@ func _process(_delta: float) -> void:
 	var currentTime = Time.get_ticks_msec()
 	var elapsedTime = (currentTime - startedWashingAt) / 1000.0
 
-	if elapsedTime >= washingTime:
+	if elapsedTime >= maxWashingTime():
 		setStatus(WashingStatus.Finished)
 
 func _unallowed_placement() -> void:
@@ -68,6 +70,10 @@ func check_placement() -> bool:
 func place() -> void:
 	_clean_placement()
 	body.set_collision_layer(1)
+	editing = false
+
+	if self.status == WashingStatus.Setup:
+		setStatus(WashingStatus.Free)
 
 func setStatus(_status: WashingStatus) -> void:
 	var currentMillis = Time.get_ticks_msec()
@@ -84,9 +90,11 @@ func setCurrentCustomer(cust: Customer) -> void:
 func changeStatus() -> void:
 	var player = Game.Player
 	var isColliding = player.interact_cast.is_colliding() and player.interact_cast.get_collider() == body
+	var isPlacing = editing or PlacementManager.is_placing()
+
 	labelName.visible = isColliding
-	labelName.text = "Status: %s | Client: %s | Elapsed: %.2f/5" % [getStatus(), getCurrentCustomerName(), getElapsedTime()]
-	interact_action.visible = isColliding
+	labelName.text = "Status: %s | Client: %s | Elapsed: %.2f/%.2f" % [getStatus(), getCurrentCustomerName(), getElapsedTime(), maxWashingTime()]
+	interact_action.visible = isColliding and not isPlacing
 
 func getStatus() -> String:
 	if status == WashingStatus.Waiting:
@@ -103,12 +111,20 @@ func getCurrentCustomerName() -> String:
 	return "none"
 
 func getElapsedTime() -> float:
+	if status != WashingStatus.Washing: return 0
 	return (Time.get_ticks_msec() - startedWashingAt) / 1000.0
 
+func maxWashingTime() -> float:
+	if not upgrades.has(Upgrade.Type.Speed): return 5
+	return upgrades[Upgrade.Type.Speed].calculateValue()
 
 func _on_move_interaction_handler_interact_call() -> void:
+	if editing: return
 	print("[%s] Handling logic to move the Washing Machine" % [self.name])
+	PlacementManager.set_editing_instance(self)
+	editing = true
 
 func _on_upgrades_interaction_handler_interact_call() -> void:
+	if editing: return
 	print("[%s] Opening Upgrades Menu" % self.name)
 	Game.openMenu(Game.MenuType.Upgrades, self)

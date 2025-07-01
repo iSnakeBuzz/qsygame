@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ba7lvfvtn5ypc"]
+[gd_scene load_steps=19 format=3 uid="uid://ba7lvfvtn5ypc"]
 
 [ext_resource type="Script" uid="uid://boedbgg5txxlu" path="res://scripts/GUIManager.gd" id="1_4yt8u"]
 [ext_resource type="Texture2D" uid="uid://b8nqunaws12s" path="res://assets/ui/placeholder-image.png" id="1_jqlde"]
@@ -9,23 +9,6 @@
 [ext_resource type="FontFile" uid="uid://dgeka46pm1b8i" path="res://fonts/Cousine/Cousine-Bold.ttf" id="6_7yii4"]
 [ext_resource type="PackedScene" uid="uid://c2hrnqwoje3ar" path="res://ui/store_menu.tscn" id="7_4yt8u"]
 [ext_resource type="PackedScene" uid="uid://nj318e8qquue" path="res://ui/upgrades_shop.tscn" id="9_p54wi"]
-
-[sub_resource type="GDScript" id="GDScript_mfius"]
-script/source = "extends Label
-
-var cachedText: String
-
-func _process(_delta: float) -> void:
-	var collider = Game.Player.interact_cast.get_collider()
-	var _name: String
-	
-	if collider != null: 
-		_name = collider.name
-	else: 
-		_name = \"Unknown\"
-	
-	self.text = \"Collider: %s\" % [_name]
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yt8u"]
 content_margin_left = 0.0
@@ -50,6 +33,19 @@ corner_radius_top_right = 56
 corner_radius_bottom_right = 56
 corner_radius_bottom_left = 56
 corner_detail = 20
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p54wi"]
+load_path = "res://.godot/imported/texture.png-610e7a763b3718ebd060a2b169667867.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xki8e"]
+atlas = SubResource("CompressedTexture2D_p54wi")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v3be1"]
+load_path = "res://.godot/imported/texture.png-341cdded643edb23e568f30f5be3f401.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqxrh"]
+atlas = SubResource("CompressedTexture2D_v3be1")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yii4"]
 content_margin_left = 0.0
@@ -108,37 +104,12 @@ func add_commas_to_int(value: int) -> String:
 "
 
 [node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("inventories")]
+follow_viewport_enabled = true
 script = ExtResource("1_4yt8u")
 inventories = {
 1: NodePath("UpgradesShop"),
 2: NodePath("StoreMenu")
 }
-
-[node name="Debug" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Debug"]
-layout_mode = 2
-
-[node name="TOP" type="HBoxContainer" parent="Debug/VBoxContainer"]
-layout_mode = 2
-alignment = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Debug/VBoxContainer/TOP"]
-layout_mode = 2
-
-[node name="Collider" type="Label" parent="Debug/VBoxContainer/TOP/VBoxContainer"]
-layout_mode = 2
-text = "Collider"
-script = SubResource("GDScript_mfius")
 
 [node name="HUD" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -233,11 +204,15 @@ text = "10:00 AM"
 [node name="TabPurchase" parent="HUD/VBoxContainer/Information/SideContainer/HBoxContainer" instance=ExtResource("1_mfius")]
 layout_mode = 2
 text = "Store"
-ui_key = "ui_open"
+ui_key = "store"
 icon_scale_ratio = 1.6000000000058208
 bg_color = Color(0.5568628, 0.43529412, 0.99607843, 1)
 text_color = Color(0.050980393, 0.011764706, 0.1882353, 1)
 spacing_x = 4
+texture_atlas = Dictionary[int, AtlasTexture]({
+0: SubResource("AtlasTexture_xki8e"),
+1: SubResource("AtlasTexture_xqxrh")
+})
 
 [node name="MoneyContainer" type="PanelContainer" parent="HUD/VBoxContainer/Information/SideContainer"]
 custom_minimum_size = Vector2(220, 0)

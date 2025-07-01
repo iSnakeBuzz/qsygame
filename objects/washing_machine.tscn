@@ -1,9 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://blj4vtvx2im5b"]
+[gd_scene load_steps=23 format=3 uid="uid://blj4vtvx2im5b"]
 
 [ext_resource type="Script" uid="uid://cjjmxe2earg8n" path="res://scripts/entities/washing_machine.gd" id="1_kjuok"]
+[ext_resource type="Script" uid="uid://dcrvc5c3d7nfg" path="res://scripts/washing/upgrade.gd" id="2_7anxb"]
 [ext_resource type="FontFile" uid="uid://c5ctbyai3kdfr" path="res://fonts/montreal/Montreal-Bold.ttf" id="2_d06m8"]
 [ext_resource type="Texture2D" uid="uid://18q0u5tmwqk6" path="res://assets/input_prompts/flair/texture.png" id="2_k44nr"]
+[ext_resource type="Resource" uid="uid://uacjvlpunxkj" path="res://resources/speed.tres" id="3_ivb2m"]
 [ext_resource type="PackedScene" uid="uid://cahrvgyoycwgo" path="res://ui/key_suggestion.tscn" id="3_k44nr"]
+[ext_resource type="Resource" uid="uid://bqhtmytysgg43" path="res://resources/money.tres" id="4_ivb2m"]
 [ext_resource type="Script" uid="uid://ct4usocmbxhjk" path="res://scripts/interactions/interaction.gd" id="5_ecm7b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k44nr"]
@@ -70,6 +73,10 @@ size = Vector3(0.35, 0.71, 0.14)
 [node name="WashingMachine" type="Node3D" node_paths=PackedStringArray("meshes")]
 script = ExtResource("1_kjuok")
 meshes = [NodePath("Area/MeshInstance3D/MeshInstance3D2"), NodePath("Area/MeshInstance3D")]
+upgrades = Dictionary[int, ExtResource("2_7anxb")]({
+0: ExtResource("3_ivb2m"),
+1: ExtResource("4_ivb2m")
+})
 
 [node name="Dev" type="Node3D" parent="."]
 
@@ -179,15 +186,17 @@ texture = SubResource("ViewportTexture_7jpbw")
 script = ExtResource("5_ecm7b")
 interact_key = &"interact"
 progressbar = NodePath("../SubViewport/HBoxContainer/Upgrades/CenterContainer/CenterContainer/upgrade_pr")
-press_duration = 0.6999999999970896
+press_duration = 0.5
 interacting_with = NodePath("../../Area/StaticBody")
+disable_on_placement = true
 
 [node name="MoveInteractionHandler" type="Node3D" parent="InteractAction" node_paths=PackedStringArray("progressbar", "interacting_with")]
 script = ExtResource("5_ecm7b")
 interact_key = &"move"
 progressbar = NodePath("../SubViewport/HBoxContainer/Move/CenterContainer/CenterContainer/move_pr")
-press_duration = 0.6999999999970896
+press_duration = 0.5
 interacting_with = NodePath("../../Area/StaticBody")
+disable_on_placement = true
 
 [node name="Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)

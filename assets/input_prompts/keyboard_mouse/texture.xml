@@ -59,8 +59,8 @@
 <sprite n="keyboard_tab_icon" x="512" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
 <sprite n="keyboard_tab_icon_alternative" x="576" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
 <sprite n="keyboard_tab_icon_alternative_outline" x="640" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
-<sprite n="keyboard_tab_icon_outline" x="704" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
-<sprite n="keyboard_tab_outline" x="768" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
+<sprite n="keyboard_tab_outline" x="704" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
+<sprite n="keyboard_tab_icon_outline" x="768" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
 <sprite n="keyboard_tilde" x="832" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
 <sprite n="keyboard_tilde_outline" x="896" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />
 <sprite n="keyboard_u" x="960" y="192" w="64" h="64" r="0" pX="0.5" pY="0.5" />

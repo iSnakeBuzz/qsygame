@@ -1,7 +1,7 @@
 [gd_resource type="Environment" load_steps=3 format=3 uid="uid://b7ge0hrkb2en"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bbli7"]
-sky_top_color = Color(0.84334564, 0.75986975, 0.67531717, 1)
+sky_top_color = Color(0.935907, 0.8981954, 0.89773554, 1)
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
@@ -15,5 +15,6 @@ sky = SubResource("Sky_7w732")
 tonemap_mode = 2
 ssao_enabled = true
 glow_enabled = true
-volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.72855914, 0.69395465, 0.60632306, 1)
+volumetric_fog_emission = Color(0.66656864, 0.6665687, 0.66656864, 1)
 adjustment_saturation = 1.25

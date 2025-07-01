@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bqhtmytysgg43"]
+
+[ext_resource type="Script" uid="uid://dcrvc5c3d7nfg" path="res://scripts/washing/upgrade.gd" id="1_ishq6"]
+
+[resource]
+script = ExtResource("1_ishq6")
+display_name = "Money"
+description = "Increment the amount of money gained by client."
+type = 1
+price = 50
+calculate = 1
+max_level = 50
+metadata/_custom_type_script = "uid://dcrvc5c3d7nfg"

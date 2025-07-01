@@ -53,7 +53,10 @@ uv1_triplanar = true
 [node name="test" type="Node3D"]
 
 [node name="GUI" parent="." node_paths=PackedStringArray("inventories") instance=ExtResource("1_74lek")]
-inventories = {}
+inventories = {
+1: NodePath("UpgradesShop"),
+2: NodePath("StoreMenu")
+}
 
 [node name="Player" parent="." instance=ExtResource("1_errlg")]
 transform = Transform3D(-0.55884546, 0, -0.82927185, 0, 1, 0, 0.82927185, 0, -0.55884546, 7.4531026, 0.2, -7.1266904)
@@ -278,13 +281,13 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 13.1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.223848, 0.25000012, -5.6534443)
 
 [node name="SingleHangingCabinetLeft" parent="terrain/PlaceRegion/desktop" instance=ExtResource("20_c6rvn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.928327, 0.934492, -8.06386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.491119, 0.934492, -8.06386)
 
 [node name="SingleHangingCabinetLeft2" parent="terrain/PlaceRegion/desktop" instance=ExtResource("20_c6rvn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.555544, 0.934492, -8.06386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.090161, 0.934492, -8.06386)
 
 [node name="SingleHangingCabinetLeft3" parent="terrain/PlaceRegion/desktop" instance=ExtResource("20_c6rvn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.355544, 0.934492, -8.06386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.918336, 0.934492, -8.06386)
 
 [node name="Floor" type="CSGBox3D" parent="terrain/PlaceRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

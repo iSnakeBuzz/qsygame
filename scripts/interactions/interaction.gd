@@ -7,6 +7,7 @@ signal interact_call
 @export var progressbar: TextureProgressBar
 @export var press_duration: float = 1.0
 @export var interacting_with: StaticBody3D
+@export var disable_on_placement: bool = false
 
 var startedAt: int = 0
 
@@ -32,6 +33,7 @@ func handleInteractionCancel() -> void:
 	progressbar.value = 0.0
 
 func handleInteractionProgress() -> void:
+	if PlacementManager.is_placing() and disable_on_placement: return
 	if not are_interacting_with_us(): return
 	if startedAt == 0: return
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cc1m2a1obsyn4"]
+[gd_scene load_steps=23 format=3 uid="uid://cc1m2a1obsyn4"]
 
 [ext_resource type="Script" uid="uid://dyqni2873nd3r" path="res://addons/fpc/character.gd" id="1_0t4e8"]
 [ext_resource type="Script" uid="uid://cuyluvyfanagw" path="res://addons/fpc/EditorModule.gd" id="3_v3ckk"]
@@ -149,6 +149,10 @@ _data = {
 &"RESET": SubResource("Animation_j8cx7"),
 &"crouch": SubResource("Animation_5ec5e")
 }
+
+[sub_resource type="QuadMesh" id="QuadMesh_bupmj"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="Animation" id="Animation_gh776"]
 resource_name = "RESET"
@@ -384,7 +388,7 @@ MarginContainer/constants/margin_top = 10
 radius = 0.3
 
 [node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("HEAD", "CAMERA", "HEADBOB_ANIMATION", "JUMP_ANIMATION", "CROUCH_ANIMATION", "COLLISION_MESH")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_0t4e8")
 default_reticle = "res://addons/fpc/reticles/reticle_1.tscn"
 HEAD = NodePath("Head")
@@ -412,6 +416,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
 fov = 70.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Camera"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_bupmj")
 
 [node name="HeadbobAnimation" type="AnimationPlayer" parent="Head"]
 libraries = {

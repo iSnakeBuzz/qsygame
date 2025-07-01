@@ -54,20 +54,22 @@ func _handle_keys(event: InputEvent) -> void:
 		_create()
 		placing = true
 		print("Instance created")
-	elif event.is_action_pressed("key_0") and instance:
+	elif event.is_action_pressed("key_0") and instance and not _is_editing():
 		self._reset(true)
 		print("Instance destroyed")
 
 func _place() -> void:
+	var isEditing = _is_editing()
 	var purchased = Game.purchaseEntityObject(instance, selected_price)
-	if not purchased:
+	if not purchased and not isEditing:
 		self._reset(true)
 		return
 
 	instance.place()
 	self._reset(false)
-	self._create()
-	placing = true
+	if not isEditing:
+		self._create()
+	placing = not isEditing
 
 func _reset(delete: bool) -> void:
 	if delete:
@@ -91,3 +93,14 @@ func _snap_to_grid(position: Vector3, grid_size: float = 0.1) -> Vector3:
 		position.y,
 		snapped(position.z, grid_size),
 	)
+
+func set_editing_instance(washing_machine: WashingMachine) -> void:
+	instance = washing_machine
+	placing = true
+
+func _is_editing() -> bool:
+	if not instance: return false
+	return instance.editing
+
+func is_placing() -> bool:
+	return placing

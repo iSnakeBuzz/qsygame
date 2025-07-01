@@ -40,10 +40,10 @@ texture_atlas = Dictionary[int, AtlasTexture]({
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 14
-theme_override_constants/margin_top = 6
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_bottom = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -51,10 +51,11 @@ theme_override_constants/separation = 0
 
 [node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer"]
 modulate = Color(0, 0, 0, 1)
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(22.4, 22.4)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("2_jj163")
 expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/HBoxContainer"]
@@ -67,7 +68,7 @@ theme_override_fonts/normal_font = ExtResource("5_nk1uc")
 theme_override_fonts/bold_font = ExtResource("5_2f8bs")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "Tienda"
+text = "[color=000000ff][font_size=16][/font_size][/color]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
