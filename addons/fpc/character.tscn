@@ -423,6 +423,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 fov = 70.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Camera"]
+visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_bupmj")
 surface_material_override/0 = SubResource("ShaderMaterial_bx7cj")

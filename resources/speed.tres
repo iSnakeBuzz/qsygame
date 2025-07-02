@@ -16,5 +16,5 @@ description = "Increment the speed of the washing machine."
 image = SubResource("AtlasTexture_2sfcm")
 value = 15.0
 price_multiplier = 0.15000000000873115
-multiplier_per_level = 0.014999999999417923
+multiplier_per_level = 0.01499999999941792
 metadata/_custom_type_script = "uid://dcrvc5c3d7nfg"
